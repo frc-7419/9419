@@ -30,7 +30,7 @@ public class RobotContainer {
   private final XboxController joystick2 = new XboxController(1);
   private final ArcadeDrive arcadeDrive = new ArcadeDrive(drivebaseSubsystem, joystick1);
   private final RunIntake runIntake = new RunIntake(intakeSubsystem, joystick2);
-  private final RunShooter runShooter = new RunShooter(shooterSubsystem);
+  private final RunShooter runShooter = new RunShooter(shooterSubsystem, joystick2);
   
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */

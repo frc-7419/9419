@@ -8,8 +8,10 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.commands.ArcadeDrive;
 import frc.robot.commands.RunIntake;
+import frc.robot.commands.RunShooter;
 import frc.robot.subsystems.DrivebaseSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
+import frc.robot.subsystems.ShooterSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
 
 /**
@@ -28,7 +30,7 @@ public class RobotContainer {
   private final XboxController joystick2 = new XboxController(1);
   private final ArcadeDrive arcadeDrive = new ArcadeDrive(drivebaseSubsystem, joystick1);
   private final RunIntake runIntake = new RunIntake(intakeSubsystem, joystick2);
-  private final ShooterTest testShooter = new ShooterTest(shooterSubsystem);
+  private final RunShooter runShooter = new RunShooter(shooterSubsystem);
   
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
@@ -59,6 +61,6 @@ public class RobotContainer {
   public void setDefaultCommands() {
     drivebaseSubsystem.setDefaultCommand(arcadeDrive);
     intakeSubsystem.setDefaultCommand(runIntake);
-    shooterSubsystem.setDefaultCommand(testShooter);
+    shooterSubsystem.setDefaultCommand(runShooter);
   }
 }

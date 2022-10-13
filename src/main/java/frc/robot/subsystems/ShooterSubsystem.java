@@ -6,11 +6,11 @@ import com.ctre.phoenix.motorcontrol.can.TalonFX;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-public class RunShooter extends SubsystemBase{
+public class ShooterSubsystem extends SubsystemBase{
     private TalonFX shooter;
-
+    
     public ShooterSubsystem(){
-        shooter = new TalonFX(); // idk what falcon id is :/
+        shooter = new TalonFX(62); // idk what falcon id is :/
 
     }
 

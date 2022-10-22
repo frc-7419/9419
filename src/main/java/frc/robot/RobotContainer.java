@@ -9,11 +9,9 @@ import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.commands.ArcadeDrive;
 import frc.robot.commands.RunIntake;
 import frc.robot.commands.RunShooter;
-import frc.robot.commands.RunShooterWithJoystick;
 import frc.robot.subsystems.DrivebaseSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
-import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 /**
@@ -32,8 +30,8 @@ public class RobotContainer {
   private final XboxController joystick2 = new XboxController(1);
   private final ArcadeDrive arcadeDrive = new ArcadeDrive(drivebaseSubsystem, joystick1);
   private final RunIntake runIntake = new RunIntake(intakeSubsystem, joystick2);
-  private final RunShooter runShooter = new RunShooter(shooterSubsystem);
-  private final RunShooterWithJoystick runShooterWithJoystick = new RunShooterWithJoystick(shooterSubsystem, joystick1);
+  private final RunShooter runShooter = new RunShooter(shooterSubsystem, joystick1);
+  // private final RunShooterWithJoystick runShooterWithJoystick = new RunShooterWithJoystick(shooterSubsystem, joystick1);
   
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
@@ -50,7 +48,7 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    new JoystickButton(joystick1, XboxController.Button.kA.value).whileHeld(new RunShooter(shooterSubsystem));
+    new JoystickButton(joystick1, XboxController.Button.kY.value).whileHeld(new RunShooter(shooterSubsystem, joystick1));
   }
 
   /**
@@ -66,6 +64,6 @@ public class RobotContainer {
   public void setDefaultCommands() {
     drivebaseSubsystem.setDefaultCommand(arcadeDrive);
     intakeSubsystem.setDefaultCommand(runIntake);
-    shooterSubsystem.setDefaultCommand(runShooterWithJoystick);
+    shooterSubsystem.setDefaultCommand(runShooter);
   }
 }

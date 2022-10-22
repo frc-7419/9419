@@ -13,7 +13,7 @@ public class RunShooter extends CommandBase {
   /** Creates a new ShooterTest. */
   private ShooterSubsystem shooterSubsystem;
   private XboxController joystick;
-  private double power = 0.5;
+  private double power = 0.60;
 
   public RunShooter(ShooterSubsystem shooterSubsystem, XboxController joystick) {
     // Use addRequirements() here to declare subsystem dependencies.

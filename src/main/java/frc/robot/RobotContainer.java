@@ -22,14 +22,14 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
-  private final DrivebaseSubsystem drivebaseSubsystem = new DrivebaseSubsystem();
-  private final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
+  // private final DrivebaseSubsystem drivebaseSubsystem = new DrivebaseSubsystem();
+  // private final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
   private final ShooterSubsystem shooterSubsystem = new ShooterSubsystem();
 
   private final XboxController joystick1 = new XboxController(0);
-  private final XboxController joystick2 = new XboxController(1);
-  private final ArcadeDrive arcadeDrive = new ArcadeDrive(drivebaseSubsystem, joystick1);
-  private final RunIntake runIntake = new RunIntake(intakeSubsystem, joystick2);
+  // private final XboxController joystick2 = new XboxController(1);
+  // private final ArcadeDrive arcadeDrive = new ArcadeDrive(drivebaseSubsystem, joystick1);
+  // private final RunIntake runIntake = new RunIntake(intakeSubsystem, joystick2);
   private final RunShooter runShooter = new RunShooter(shooterSubsystem, joystick1);
   // private final RunShooterWithJoystick runShooterWithJoystick = new RunShooterWithJoystick(shooterSubsystem, joystick1);
   
@@ -62,8 +62,8 @@ public class RobotContainer {
   // }
 
   public void setDefaultCommands() {
-    drivebaseSubsystem.setDefaultCommand(arcadeDrive);
-    intakeSubsystem.setDefaultCommand(runIntake);
+    // drivebaseSubsystem.setDefaultCommand(arcadeDrive);
+    // intakeSubsystem.setDefaultCommand(runIntake);
     shooterSubsystem.setDefaultCommand(runShooter);
   }
 }

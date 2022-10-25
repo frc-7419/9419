@@ -14,8 +14,8 @@ public class ArcadeDrive extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
   private final DrivebaseSubsystem m_subsystem;
   private XboxController joystick;
-  private double straightCoefficient = 0.1;
-  private double turnCoefficient = 0.1;
+  private double straightCoefficient = 0.25;
+  private double turnCoefficient = 0.25;
   /**
    * Creates a new ExampleCommand.
    *

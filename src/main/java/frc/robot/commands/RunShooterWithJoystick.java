@@ -27,7 +27,7 @@ public class RunShooterWithJoystick extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    shooterSubsystem.setShooterPower(xboxController.getLeftY());
+    shooterSubsystem.setShooterPower(0.25*xboxController.getLeftY());
     SmartDashboard.putNumber("ShooterSpeed", xboxController.getLeftY());
   }
 

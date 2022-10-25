@@ -40,14 +40,17 @@ public class ArcadeDrive extends CommandBase {
     double straightPower = straightCoefficient * joystick.getLeftY();
     double turnPower = turnCoefficient * joystick.getRightX(); 
     double leftPower = turnPower + straightPower;
-    double rightPower = turnPower - straightPower;
+    double rightPower = straightPower - turnPower;
     m_subsystem.setLeftPower(leftPower);
     m_subsystem.setRightPower(rightPower);
   }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+    m_subsystem.setLeftPower(0);
+    m_subsystem.setRightPower(0);
+  }
 
   // Returns true when the command should end.
   @Override

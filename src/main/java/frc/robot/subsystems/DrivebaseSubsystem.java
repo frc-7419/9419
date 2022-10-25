@@ -36,6 +36,18 @@ public class DrivebaseSubsystem extends SubsystemBase {
     right1.set(ControlMode.PercentOutput, power);
     right2.set(ControlMode.PercentOutput, power);
   }
+  public TalonFX getLeftMast() {
+    return left1;
+  }
+  public TalonFX getRightMast() {
+    return right1;
+  }
+  public TalonFX getLeftFollow() {
+    return left2;
+  }
+  public TalonFX getRightFollow() {
+    return right2;
+  }
 
   @Override
   public void periodic() {

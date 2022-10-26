@@ -4,31 +4,36 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.ShooterSubsystem;
+import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class RunShooterWithJoystick extends CommandBase {
+
   private ShooterSubsystem shooterSubsystem;
-  private XboxController xboxController;
+  private XboxController joystick;
+  
+
   /** Creates a new RunShooterWithJoystick. */
-  public RunShooterWithJoystick(ShooterSubsystem shooterSubsystem, XboxController xboxController) {
+  public RunShooterWithJoystick(ShooterSubsystem shooterSubsystem, XboxController joystick) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.shooterSubsystem = shooterSubsystem;
-    this.xboxController =xboxController;
+    this.joystick = joystick;
     addRequirements(shooterSubsystem);
   }
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+    shooterSubsystem.coast();
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    shooterSubsystem.setShooterPower(0.25*xboxController.getLeftY());
-    SmartDashboard.putNumber("ShooterSpeed", xboxController.getLeftY());
+    shooterSubsystem.setShooterPower(0.25*joystick.getLeftY());
+    SmartDashboard.putNumber("ShooterSpeed", joystick.getLeftY());
   }
 
   // Called once the command ends or is interrupted.

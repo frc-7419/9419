@@ -37,6 +37,12 @@ public class DrivebaseSubsystem extends SubsystemBase {
     right2.set(ControlMode.PercentOutput, power);
   }
 
+  public void allPower(double power){
+    setLeftPower(power);
+    setRightPower(power);
+  }
+  
+
   @Override
   public void periodic() {
     // This method will be called once per scheduler run

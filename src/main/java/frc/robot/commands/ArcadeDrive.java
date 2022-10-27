@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj.XboxController;
 /** An example command that uses an example subsystem. */
 public class ArcadeDrive extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
-  private final DrivebaseSubsystem m_subsystem;
+  private final DrivebaseSubsystem drivebaseSubsystem;
   private XboxController joystick;
   private double straightCoefficient = 0.25;
   private double turnCoefficient = 0.25;
@@ -21,11 +21,11 @@ public class ArcadeDrive extends CommandBase {
    *
    * @param subsystem The subsystem used by this command.
    */
-  public ArcadeDrive(DrivebaseSubsystem subsystem, XboxController joystick) {
-    m_subsystem = subsystem;
+  public ArcadeDrive(DrivebaseSubsystem drivebaseSubsystem, XboxController joystick) {
+    this.drivebaseSubsystem = drivebaseSubsystem;
     this.joystick = joystick;
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(subsystem);
+    addRequirements(drivebaseSubsystem);
   }
 
   // Called when the command is initially scheduled.
@@ -41,8 +41,8 @@ public class ArcadeDrive extends CommandBase {
     double turnPower = turnCoefficient * joystick.getRightX(); 
     double leftPower = turnPower + straightPower;
     double rightPower = turnPower - straightPower;
-    m_subsystem.setLeftPower(leftPower);
-    m_subsystem.setRightPower(rightPower);
+    drivebaseSubsystem.setLeftPower(leftPower);
+    drivebaseSubsystem.setRightPower(rightPower);
   }
 
   // Called once the command ends or is interrupted.

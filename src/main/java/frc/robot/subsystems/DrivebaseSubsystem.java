@@ -49,6 +49,12 @@ public class DrivebaseSubsystem extends SubsystemBase {
     return right2;
   }
 
+  public void allPower(double power){
+    setLeftPower(power);
+    setRightPower(power);
+  }
+  
+
   @Override
   public void periodic() {
     // This method will be called once per scheduler run

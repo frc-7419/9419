@@ -8,10 +8,9 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class ShooterSubsystem extends SubsystemBase{
     private TalonFX shooter;
-    
-    public ShooterSubsystem(){
-        shooter = new TalonFX(62); // idk what falcon id is :/
 
+    public ShooterSubsystem(){
+        shooter = new TalonFX(62);
     }
 
     public void setShooterPower(double power){

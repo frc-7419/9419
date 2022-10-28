@@ -12,20 +12,20 @@ import edu.wpi.first.wpilibj.XboxController;
 /** An example command that uses an example subsystem. */
 public class ArcadeDrive extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
-  private final DrivebaseSubsystem m_subsystem;
+  private final DrivebaseSubsystem drivebaseSubsystem;
   private XboxController joystick;
-  private double straightCoefficient = 0.1;
-  private double turnCoefficient = 0.1;
+  private double straightCoefficient = 0.25;
+  private double turnCoefficient = 0.25;
   /**
    * Creates a new ExampleCommand.
    *
    * @param subsystem The subsystem used by this command.
    */
-  public ArcadeDrive(DrivebaseSubsystem subsystem, XboxController joystick) {
-    m_subsystem = subsystem;
+  public ArcadeDrive(DrivebaseSubsystem drivebaseSubsystem, XboxController joystick) {
+    this.drivebaseSubsystem = drivebaseSubsystem;
     this.joystick = joystick;
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(subsystem);
+    addRequirements(drivebaseSubsystem);
   }
 
   // Called when the command is initially scheduled.
@@ -40,16 +40,16 @@ public class ArcadeDrive extends CommandBase {
     double straightPower = straightCoefficient * joystick.getLeftY();
     double turnPower = turnCoefficient * joystick.getRightX(); 
     double leftPower = turnPower + straightPower;
-    double rightPower = straightPower - turnPower;
-    m_subsystem.setLeftPower(leftPower);
-    m_subsystem.setRightPower(rightPower);
+    double rightPower = turnPower - straightPower;
+    drivebaseSubsystem.setLeftPower(leftPower);
+    drivebaseSubsystem.setRightPower(rightPower);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    m_subsystem.setLeftPower(0);
-    m_subsystem.setRightPower(0);
+    drivebaseSubsystem.setLeftPower(0);
+    drivebaseSubsystem.setRightPower(0);
   }
 
   // Returns true when the command should end.

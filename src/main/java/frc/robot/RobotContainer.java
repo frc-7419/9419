@@ -7,13 +7,16 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.commands.ArcadeDrive;
+import frc.robot.commands.RunHangar;
 import frc.robot.commands.RunIntake;
+import frc.robot.commands.RunLoaderWithJoystick;
 import frc.robot.commands.RunShooter;
 import frc.robot.commands.RunShooterWithJoystick;
 import frc.robot.subsystems.DrivebaseSubsystem;
+import frc.robot.subsystems.HangarSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
+import frc.robot.subsystems.LoaderSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
-import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 /**
@@ -27,6 +30,8 @@ public class RobotContainer {
   private final DrivebaseSubsystem drivebaseSubsystem = new DrivebaseSubsystem();
   private final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
   private final ShooterSubsystem shooterSubsystem = new ShooterSubsystem();
+  private final HangarSubsystem hangarSubsystem = new HangarSubsystem();
+  private final LoaderSubsystem loaderSubsystem = new LoaderSubsystem();
 
   private final XboxController joystick1 = new XboxController(0);
   private final XboxController joystick2 = new XboxController(1);
@@ -34,6 +39,8 @@ public class RobotContainer {
   private final RunIntake runIntake = new RunIntake(intakeSubsystem, joystick2);
   private final RunShooter runShooter = new RunShooter(shooterSubsystem);
   private final RunShooterWithJoystick runShooterWithJoystick = new RunShooterWithJoystick(shooterSubsystem, joystick2);
+  private final RunLoaderWithJoystick runLoaderWithJoystick = new RunLoaderWithJoystick(loaderSubsystem, joystick2);
+  private final RunHangar runHangar = new RunHangar(hangarSubsystem);
   
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
@@ -67,5 +74,7 @@ public class RobotContainer {
     drivebaseSubsystem.setDefaultCommand(arcadeDrive);
     intakeSubsystem.setDefaultCommand(runIntake);
     shooterSubsystem.setDefaultCommand(runShooterWithJoystick);
+    loaderSubsystem.setDefaultCommand(runLoaderWithJoystick);
+    hangarSubsystem.setDefaultCommand(runHangar);
   }
 }

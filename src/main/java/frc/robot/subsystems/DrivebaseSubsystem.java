@@ -7,6 +7,7 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
+import static frc.robot.Constants.CanIds.*;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 // import frc.robot.Constants.CanIds;
@@ -19,10 +20,10 @@ public class DrivebaseSubsystem extends SubsystemBase {
   private TalonFX right2;
 
   public DrivebaseSubsystem() {
-    left1 = new TalonFX(2);
-    left2 = new TalonFX(3);
-    right1 = new TalonFX(4);
-    right2 = new TalonFX(5);
+    left1 = new TalonFX(leftmast.id);
+    left2 = new TalonFX(leftfollow.id);
+    right1 = new TalonFX(rightmast.id);
+    right2 = new TalonFX(rightfollow.id);
   }
 
   public void setLeftPower(double power) {

@@ -4,7 +4,7 @@
 
 package frc.robot.commands;
 
-import frc.robot.subsystems.DrivebaseSubsystem;
+import frc.robot.subsystems.DriveBaseSubsystem;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj.XboxController;
 
@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj.XboxController;
 /** An example command that uses an example subsystem. */
 public class ArcadeDrive extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
-  private final DrivebaseSubsystem drivebaseSubsystem;
+  private final DriveBaseSubsystem drivebaseSubsystem;
   private XboxController joystick;
   private double straightCoefficient = 0.25;
   private double turnCoefficient = 0.25;
@@ -21,7 +21,7 @@ public class ArcadeDrive extends CommandBase {
    *
    * @param subsystem The subsystem used by this command.
    */
-  public ArcadeDrive(DrivebaseSubsystem drivebaseSubsystem, XboxController joystick) {
+  public ArcadeDrive(DriveBaseSubsystem drivebaseSubsystem, XboxController joystick) {
     this.drivebaseSubsystem = drivebaseSubsystem;
     this.joystick = joystick;
     // Use addRequirements() here to declare subsystem dependencies.

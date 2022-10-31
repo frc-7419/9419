@@ -28,4 +28,16 @@ public final class Constants {
             this.id = id;
         }
     }
+    public static class PIDConstants {
+        //drive
+        public static final double DriveBaseMotionMagickP = 0.5;
+        public static final double DriveBaseMotionMagickI = 0;
+        public static final double DriveBaseMotionMagickD = 0;
+
+        // turn with gyro gains:
+        public static final double GyrokP = 0.0085;
+        public static final double GyrokI = 0.00;
+        public static final double GyrokD = 0.0001;
+
+    }
 }

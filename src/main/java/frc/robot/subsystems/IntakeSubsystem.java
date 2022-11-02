@@ -13,7 +13,7 @@ public class IntakeSubsystem extends SubsystemBase {
   /** Creates a new IntakeSubsystem. */
   private VictorSPX intake;
   public IntakeSubsystem() {
-    intake = new VictorSPX(12);
+    intake = new VictorSPX(40);
 
   }
 

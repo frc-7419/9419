@@ -36,7 +36,7 @@ public class RobotContainer {
   private final XboxController joystick1 = new XboxController(0);
   private final XboxController joystick2 = new XboxController(1);
   private final ArcadeDrive arcadeDrive = new ArcadeDrive(drivebaseSubsystem, joystick1);
-  private final RunIntake runIntake = new RunIntake(intakeSubsystem, joystick2);
+  private final RunIntake runIntake = new RunIntake(intakeSubsystem, joystick1);
   // private final RunShooter runShooter = new RunShooter(shooterSubsystem);
   private final RunShooterWithJoystick runShooterWithJoystick = new RunShooterWithJoystick(shooterSubsystem, joystick2);
   private final RunLoaderWithJoystick runLoaderWithJoystick = new RunLoaderWithJoystick(loaderSubsystem, joystick2);

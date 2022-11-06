@@ -32,8 +32,14 @@ public class RunShooterWithJoystick extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    shooterSubsystem.setShooterPower(0.25*joystick.getLeftY());
-    SmartDashboard.putNumber("ShooterSpeed", joystick.getLeftY());
+   
+    double power = 0.55;
+    //Shooting with bumper
+    if (joystick.getRightBumperPressed())
+    {
+      shooterSubsystem.setShooterPower(power);
+    }
+    SmartDashboard.putNumber("ShooterSpeed", power);
   }
 
   // Called once the command ends or is interrupted.

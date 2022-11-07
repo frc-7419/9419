@@ -54,6 +54,19 @@ public class DrivebaseSubsystem extends SubsystemBase {
     setRightPower(power);
   }
   
+  public void coast() {
+    right1.setNeutralMode(NeutralMode.Coast);
+    right2.setNeutralMode(NeutralMode.Coast);
+    left1.setNeutralMode(NeutralMode.Coast);
+    left2.setNeutralMode(NeutralMode.Coast);
+  }
+
+  public void brake() {
+    right1.setNeutralMode(NeutralMode.Brake);
+    right2.setNeutralMode(NeutralMode.Brake);
+    left1.setNeutralMode(NeutralMode.Brake);
+    left2.setNeutralMode(NeutralMode.Brake);
+  }
 
   @Override
   public void periodic() {

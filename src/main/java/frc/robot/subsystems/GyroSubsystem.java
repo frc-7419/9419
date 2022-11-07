@@ -12,7 +12,19 @@ import edu.wpi.first.wpilibj.SerialPort;
 
 public class GyroSubsystem extends SubsystemBase {
   /** Creates a new GyroSubsystem. */
-  public GyroSubsystem() {}
+
+  private AHRS ahrs;
+
+  public GyroSubsystem() {
+    try {
+			/* Communicate w/navX-MXP via the MXP SPI Bus (use mini USB to USB A cable)   
+			   Alternatively:  I2C.Port.kMXP, SerialPort.Port.kMXP or S     
+			   See http://navx-mxp.kauailabs.com/guidance/selecting-an-interface/ for details. */
+               ahrs = new AHRS(SerialPort.Port.kMXP); 
+		} catch (RuntimeException ex ) {
+            DriverStation.reportError("Error instantiating navX-MXP:  " + ex.getMessage(), true); 
+        }
+  }
 
   public double getGyroAngle() {
     return ahrs.getAngle();

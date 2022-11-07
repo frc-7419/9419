@@ -12,11 +12,13 @@ import frc.robot.commands.RunIntake;
 import frc.robot.commands.RunLoaderWithJoystick;
 import frc.robot.commands.RunShooter;
 import frc.robot.commands.RunShooterWithJoystick;
-import frc.robot.subsystems.DrivebaseSubsystem;
+import frc.robot.commands.autos.TwoBallAuto;
+import frc.robot.subsystems.DriveBaseSubsystem;
 import frc.robot.subsystems.HangarSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.LoaderSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
+import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 /**
@@ -27,7 +29,7 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
-  private final DrivebaseSubsystem drivebaseSubsystem = new DrivebaseSubsystem();
+  private final DriveBaseSubsystem drivebaseSubsystem = new DriveBaseSubsystem();
   private final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
   private final ShooterSubsystem shooterSubsystem = new ShooterSubsystem();
   private final HangarSubsystem hangarSubsystem = new HangarSubsystem();
@@ -41,6 +43,7 @@ public class RobotContainer {
   private final RunShooterWithJoystick runShooterWithJoystick = new RunShooterWithJoystick(shooterSubsystem, joystick2);
   private final RunLoaderWithJoystick runLoaderWithJoystick = new RunLoaderWithJoystick(loaderSubsystem, joystick2);
   private final RunHangar runHangar = new RunHangar(hangarSubsystem);
+  private final TwoBallAuto twoBallAuto = new TwoBallAuto(drivebaseSubsystem, shooterSubsystem);
   
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
@@ -64,11 +67,11 @@ public class RobotContainer {
    * Use this to pass the autonomous command to the main {@link Robot} class.
    *
    * @return the command to run in autonomous
-  //  */
-  // public Command getAutonomousCommand() {
-  //   // An ExampleCommand will run in autonomous
-  //   return m_autoCommand;
-  // }
+   */
+  public Command getAutonomousCommand() {
+    // An ExampleCommand will run in autonomous
+    return twoBallAuto;
+  }
 
   public void setDefaultCommands() {
     drivebaseSubsystem.setDefaultCommand(arcadeDrive);

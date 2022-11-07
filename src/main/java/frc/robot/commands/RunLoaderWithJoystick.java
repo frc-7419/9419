@@ -31,6 +31,9 @@ public class RunLoaderWithJoystick extends CommandBase {
     } else if (joystick.getRightBumper()) {
       loaderSubsystem.setPower(0.5);
     }
+    else {
+      loaderSubsystem.setPower(0);
+    }
   }
 
   // Called once the command ends or is interrupted.

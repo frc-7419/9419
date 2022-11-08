@@ -21,7 +21,7 @@ public final class Constants {
         leftfollow(3),
         rightfollow(5),
         hangar(69), //placeholder
-        loader(12),
+        loader(99), //placeholder
         shoter(62);
         public final int id;
         private CanIds(int id) {

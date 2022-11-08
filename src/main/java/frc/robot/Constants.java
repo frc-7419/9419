@@ -42,4 +42,9 @@ public final class Constants {
         public static final double GyrokD = 0.0001;
 
     }
+    public static class LimelightConstants {
+        public static final double kTargetHeight = 2.6416;//meters
+        
+
+    }
 }

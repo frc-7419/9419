@@ -20,9 +20,11 @@ public final class Constants {
         rightmast(2),
         leftfollow(4),
         rightfollow(3),
-        hangar(12), //placeholder
-        loader(35), //placeholder
-        shoter(62);
+        hangar(12),
+        intake(40),
+        loader(35), // currenty grey (not motorized)
+        shoter(62),
+        talon(53);
         public final int id;
         private CanIds(int id) {
             this.id = id;

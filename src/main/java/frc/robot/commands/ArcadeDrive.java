@@ -37,10 +37,11 @@ public class ArcadeDrive extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    double straightPower = straightCoefficient * joystick.getLeftY();
-    double turnPower = turnCoefficient * joystick.getRightX(); 
-    double leftPower = turnPower + straightPower;
-    double rightPower = turnPower - straightPower;
+    double xSpeed = joystick.getLeftY() * straightCoefficient;
+    double zRotation = joystick.getRightX() * turnCoefficient;
+ 
+    double leftPower = xSpeed + zRotation;
+    double rightPower = xSpeed - zRotation;
     drivebaseSubsystem.setLeftPower(leftPower);
     drivebaseSubsystem.setRightPower(rightPower);
   }

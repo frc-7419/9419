@@ -13,7 +13,6 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 // import frc.robot.Constants.CanIds;
 
 public class DriveBaseSubsystem extends SubsystemBase {
-  /** Creates a new ExampleSubsystem. */
   private TalonFX left1;
   private TalonFX left2;
   private TalonFX right1;
@@ -26,11 +25,15 @@ public class DriveBaseSubsystem extends SubsystemBase {
     right2 = new TalonFX(rightfollow.id);
     factoryResetAll();
 
-    right1.setSensorPhase(false);
+    factoryResetAll();
 
+    right1.setInverted(true);
+    right1.setSensorPhase(false);
+    right2.setInverted(true);
     right2.setSensorPhase(false);
-    setAllDefaultInversions();
-    
+
+    left1.setInverted(false);
+    left2.setInverted(false);
 
     left2.follow(left1);
     right2.follow(right1);
@@ -73,17 +76,6 @@ public class DriveBaseSubsystem extends SubsystemBase {
   }
   public void brake(){setAllMode(NeutralMode.Brake);}
   public void coast(){setAllMode(NeutralMode.Coast);}
-
-  public void setAllDefaultInversions() {
-    
-    right1.setInverted(true);
-    right2.setInverted(true);
-    left1.setInverted(true);
-    left2.setInverted(true);
-    
-   
-
-  }
 
   public void factoryResetAll() {
     right1.configFactoryDefault();

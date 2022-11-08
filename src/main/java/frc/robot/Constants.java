@@ -16,10 +16,10 @@ public final class Constants {
     public static final double g = 9.81;
     public static final double pi = 3.14159;
     public static enum CanIds {
-        leftmast(2),
-        rightmast(4),
-        leftfollow(3),
-        rightfollow(5),
+        leftmast(5),
+        rightmast(2),
+        leftfollow(4),
+        rightfollow(3),
         hangar(12), //placeholder
         loader(35), //placeholder
         shoter(62);

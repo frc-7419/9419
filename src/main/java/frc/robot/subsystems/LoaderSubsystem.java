@@ -13,10 +13,14 @@ import static frc.robot.Constants.CanIds.*;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class LoaderSubsystem extends SubsystemBase {
+  
   private VictorSPX victorSPX;
+  private TalonFX talonFX;
+
   /** Creates a new LoaderSubsystem. */
   public LoaderSubsystem() {
-    this.victorSPX = new VictorSPX(12);
+    //this.victorSPX = new VictorSPX(35);
+    this.talonFX = new TalonFX(53);
   }
 
   @Override
@@ -24,6 +28,7 @@ public class LoaderSubsystem extends SubsystemBase {
     // This method will be called once per scheduler run
   }
   public void setPower(double power) {
-    victorSPX.set(ControlMode.PercentOutput, power);
+    //victorSPX.set(ControlMode.PercentOutput, power);
+    talonFX.set(ControlMode.PercentOutput, power);
   }
 }

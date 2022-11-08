@@ -74,10 +74,10 @@ public class RobotContainer {
   }
 
   public void setDefaultCommands() {
-    drivebaseSubsystem.setDefaultCommand(arcadeDrive);
-    intakeSubsystem.setDefaultCommand(runIntake);
-    shooterSubsystem.setDefaultCommand(runShooterWithJoystick);
+    //drivebaseSubsystem.setDefaultCommand(arcadeDrive);
+    //intakeSubsystem.setDefaultCommand(runIntake);
+    //shooterSubsystem.setDefaultCommand(runShooterWithJoystick);
     loaderSubsystem.setDefaultCommand(runLoaderWithJoystick);
-    hangarSubsystem.setDefaultCommand(runHangar);
+    //hangarSubsystem.setDefaultCommand(runHangar);
   }
 }

@@ -20,8 +20,8 @@ public final class Constants {
         rightmast(4),
         leftfollow(3),
         rightfollow(5),
-        hangar(69), //placeholder
-        loader(99), //placeholder
+        hangar(12), //placeholder
+        loader(35), //placeholder
         shoter(62);
         public final int id;
         private CanIds(int id) {

@@ -30,6 +30,8 @@ public class RunIntake extends CommandBase {
       intakeSubsystem.setSpeed(-speed);
     } else if (joystick.getBButton()) {
       intakeSubsystem.setSpeed(speed);
+    } else {
+      intakeSubsystem.setSpeed(0);
     }
   }
 

@@ -16,7 +16,7 @@ public class RunLoaderWithJoystick extends CommandBase {
     this.loaderSubsystem = loaderSubsystem;
     this.joystick = joystick;
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(this.loaderSubsystem);
+    addRequirements(loaderSubsystem);
   }
 
   // Called when the command is initially scheduled.
@@ -26,10 +26,10 @@ public class RunLoaderWithJoystick extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if (joystick.getLeftBumper()) {
-      loaderSubsystem.setPower(-0.5);
-    } else if (joystick.getRightBumper()) {
-      loaderSubsystem.setPower(0.5);
+    if (joystick.getRightTriggerAxis()!=0) {
+      loaderSubsystem.setPower(-1);
+    } else if (joystick.getLeftTriggerAxis()!=0) {
+      loaderSubsystem.setPower(1);
     }
     else {
       loaderSubsystem.setPower(0);

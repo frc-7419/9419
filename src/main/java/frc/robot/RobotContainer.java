@@ -41,7 +41,7 @@ public class RobotContainer {
   private final RunIntake runIntake = new RunIntake(intakeSubsystem, joystick1);
   // private final RunShooter runShooter = new RunShooter(shooterSubsystem);
   private final RunShooterWithJoystick runShooterWithJoystick = new RunShooterWithJoystick(shooterSubsystem, joystick2);
-  private final RunLoaderWithJoystick runLoaderWithJoystick = new RunLoaderWithJoystick(loaderSubsystem, joystick2);
+  private final RunLoaderWithJoystick runLoaderWithJoystick = new RunLoaderWithJoystick(loaderSubsystem, joystick1);
   private final RunHangar runHangar = new RunHangar(hangarSubsystem);
   private final TwoBallAuto twoBallAuto = new TwoBallAuto(drivebaseSubsystem, shooterSubsystem);
   
@@ -74,7 +74,7 @@ public class RobotContainer {
   }
 
   public void setDefaultCommands() {
-    drivebaseSubsystem.setDefaultCommand(arcadeDrive);
+    // drivebaseSubsystem.setDefaultCommand(arcadeDrive);
     intakeSubsystem.setDefaultCommand(runIntake);
     shooterSubsystem.setDefaultCommand(runShooterWithJoystick);
     loaderSubsystem.setDefaultCommand(runLoaderWithJoystick);

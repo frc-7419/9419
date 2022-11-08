@@ -75,10 +75,14 @@ public class DriveBaseSubsystem extends SubsystemBase {
   public void coast(){setAllMode(NeutralMode.Coast);}
 
   public void setAllDefaultInversions() {
+    
     right1.setInverted(true);
     right2.setInverted(true);
-    left1.setInverted(false);
-    left2.setInverted(false);
+    left1.setInverted(true);
+    left2.setInverted(true);
+    
+   
+
   }
 
   public void factoryResetAll() {

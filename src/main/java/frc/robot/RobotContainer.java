@@ -10,7 +10,6 @@ import frc.robot.commands.ArcadeDrive;
 import frc.robot.commands.RunHangar;
 import frc.robot.commands.RunIntake;
 import frc.robot.commands.RunLoaderWithJoystick;
-import frc.robot.commands.RunShooter;
 import frc.robot.commands.RunShooterWithJoystick;
 import frc.robot.commands.autos.TwoBallAuto;
 import frc.robot.subsystems.DriveBaseSubsystem;
@@ -39,7 +38,6 @@ public class RobotContainer {
   private final XboxController joystick2 = new XboxController(1);
   private final ArcadeDrive arcadeDrive = new ArcadeDrive(drivebaseSubsystem, joystick1);
   private final RunIntake runIntake = new RunIntake(intakeSubsystem, joystick1);
-  // private final RunShooter runShooter = new RunShooter(shooterSubsystem);
   private final RunShooterWithJoystick runShooterWithJoystick = new RunShooterWithJoystick(shooterSubsystem, joystick2);
   private final RunLoaderWithJoystick runLoaderWithJoystick = new RunLoaderWithJoystick(loaderSubsystem, joystick1);
   private final RunHangar runHangar = new RunHangar(hangarSubsystem);

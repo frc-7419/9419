@@ -5,7 +5,6 @@
 package frc.robot.commands.autos;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import frc.robot.commands.RunShooter;
 import frc.robot.commands.StraightWithMotionMagic;
 import frc.robot.subsystems.DriveBaseSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
@@ -18,6 +17,6 @@ public class TwoBallAuto extends SequentialCommandGroup {
   public TwoBallAuto(DriveBaseSubsystem driveBaseSubsystem, ShooterSubsystem shooterSubsystem) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    addCommands(new StraightWithMotionMagic(driveBaseSubsystem, 10), new RunShooter(shooterSubsystem));
+    addCommands(new StraightWithMotionMagic(driveBaseSubsystem, 10));
   }
 }

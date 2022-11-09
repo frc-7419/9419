@@ -11,7 +11,7 @@ public class RunIntake extends CommandBase {
   /** Creates a new RunIntake. */
   private IntakeSubsystem intakeSubsystem;
   private XboxController joystick;
-  private double speed = 0.75;
+  private double speed = 1.0;
   public RunIntake(IntakeSubsystem intakeSubsystem, XboxController joystick) {
     this.intakeSubsystem = intakeSubsystem;
     this.joystick = joystick;

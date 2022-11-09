@@ -9,6 +9,7 @@ import frc.robot.Constants.LimelightConstants;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class LimelightSubsystem extends SubsystemBase {
   NetworkTable networkTable = NetworkTableInstance.getDefault().getTable("limelight");
   NetworkTableEntry tv = networkTable.getEntry("tv"); // Whether the limelight has any valid targets (0 or 1)
@@ -18,7 +19,7 @@ public class LimelightSubsystem extends SubsystemBase {
   NetworkTableEntry ts = networkTable.getEntry("ts"); // Skew or rotation (-90 degrees to 0 degrees)
 
   private double kTargetHeight = LimelightConstants.kTargetHeight;
-  private double kCameraHeight; //=something
+  private double kCameraHeight = LimelightConstants.kCameraHeight; 
   private double theta;
   private double distance;
   public LimelightSubsystem() {}
@@ -26,6 +27,12 @@ public class LimelightSubsystem extends SubsystemBase {
   @Override
   public void periodic() {
     distance = (kTargetHeight-kCameraHeight)/(Math.tan(Math.toRadians(getTy() + LimelightConstants.mountingAngle))*(Math.cos(Math.toRadians(getTx()))));
+    // SmartDashboard.putNumber("tv", tv.getDouble(0));
+    // SmartDashboard.putNumber("tx", tx.getDouble(0));
+    // SmartDashboard.putNumber("ty", ty.getDouble(0));
+    // SmartDashboard.putNumber("ta", ta.getDouble(0));
+    // SmartDashboard.putNumber("theta", getTheta());
+    // SmartDashboard.putNumber("distance", getDistance());
   }
   public double getTv() {
     return tv.getDouble(0);

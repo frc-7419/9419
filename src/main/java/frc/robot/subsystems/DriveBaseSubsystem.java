@@ -77,6 +77,9 @@ public class DriveBaseSubsystem extends SubsystemBase {
   public void brake(){setAllMode(NeutralMode.Brake);}
   public void coast(){setAllMode(NeutralMode.Coast);}
 
+  public double getLeftVelocity(){return left1.getSelectedSensorVelocity();}
+  public double getRightVelocity(){return right1.getSelectedSensorVelocity();}
+  
   public void factoryResetAll() {
     right1.configFactoryDefault();
     right2.configFactoryDefault();

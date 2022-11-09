@@ -12,10 +12,12 @@ import frc.robot.commands.RunIntake;
 import frc.robot.commands.RunLoaderWithJoystick;
 import frc.robot.commands.RunShooter;
 import frc.robot.commands.RunShooterWithJoystick;
+import frc.robot.commands.TurnToTargetClosedLoop;
 import frc.robot.commands.autos.TwoBallAuto;
 import frc.robot.subsystems.DriveBaseSubsystem;
 import frc.robot.subsystems.HangarSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
+import frc.robot.subsystems.LimelightSubsystem;
 import frc.robot.subsystems.LoaderSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -34,11 +36,13 @@ public class RobotContainer {
   private final ShooterSubsystem shooterSubsystem = new ShooterSubsystem();
   private final HangarSubsystem hangarSubsystem = new HangarSubsystem();
   private final LoaderSubsystem loaderSubsystem = new LoaderSubsystem();
+  private final LimelightSubsystem limelightSubsystem = new LimelightSubsystem();
 
   private final XboxController joystick1 = new XboxController(0);
   private final XboxController joystick2 = new XboxController(1);
   private final ArcadeDrive arcadeDrive = new ArcadeDrive(drivebaseSubsystem, joystick1);
   private final RunIntake runIntake = new RunIntake(intakeSubsystem, joystick1);
+  private final TurnToTargetClosedLoop turnToTargetClosedLoop = new TurnToTargetClosedLoop(drivebaseSubsystem, limelightSubsystem);
   // private final RunShooter runShooter = new RunShooter(shooterSubsystem);
   private final RunShooterWithJoystick runShooterWithJoystick = new RunShooterWithJoystick(shooterSubsystem, joystick2);
   private final RunLoaderWithJoystick runLoaderWithJoystick = new RunLoaderWithJoystick(loaderSubsystem, joystick2);
@@ -79,5 +83,6 @@ public class RobotContainer {
     shooterSubsystem.setDefaultCommand(runShooterWithJoystick);
     loaderSubsystem.setDefaultCommand(runLoaderWithJoystick);
     hangarSubsystem.setDefaultCommand(runHangar);
+    limelightSubsystem.setDefaultCommand(turnToTargetClosedLoop);
   }
 }

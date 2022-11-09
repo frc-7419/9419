@@ -44,7 +44,7 @@ public final class Constants {
     }
     public static class LimelightConstants {
         public static final double kTargetHeight = 2.6416;//meters
-        
-
+        public static final double mountingAngle = 50; //degrees
+        public static final double kCameraHeight; 
     }
 }

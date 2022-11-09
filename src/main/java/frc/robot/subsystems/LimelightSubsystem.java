@@ -20,12 +20,12 @@ public class LimelightSubsystem extends SubsystemBase {
   private double kTargetHeight = LimelightConstants.kTargetHeight;
   private double kCameraHeight; //=something
   private double theta;
-  private double distnace;
+  private double distance;
   public LimelightSubsystem() {}
 
   @Override
   public void periodic() {
-    
+    distance = (kTargetHeight-kCameraHeight)/(Math.tan(Math.toRadians(getTy() + LimelightConstants.mountingAngle))*(Math.cos(Math.toRadians(getTx()))));
   }
   public double getTv() {
     return tv.getDouble(0);
@@ -36,4 +36,6 @@ public class LimelightSubsystem extends SubsystemBase {
   public double getTy() {
     return ty.getDouble(0);
   }
+  public double getTheta() {return theta;}
+  public double getDistance() {return distance;}
 }

@@ -35,13 +35,24 @@ public class RunShooterWithJoystick extends CommandBase {
    
     double power = 0.55;
     //Shooting with bumper
-    if (joystick.getRightTriggerAxis()!=0)
+    
+    //if (joystick.getRightTriggerAxis()!=0)
+    //{
+    //  shooterSubsystem.setShooterPower(joystick.getRightTriggerAxis());
+    //} else if (joystick.getLeftTriggerAxis()!=0){
+    //  shooterSubsystem.setShooterPower(-joystick.getLeftTriggerAxis());
+    //}
+    
+    //0.55 speed, running to shoot
+    if (joystick.getYButton())
     {
-      shooterSubsystem.setShooterPower(joystick.getRightTriggerAxis());
-    } else if (joystick.getLeftTriggerAxis()!=0){
-      shooterSubsystem.setShooterPower(-joystick.getLeftTriggerAxis());
+      shooterSubsystem.setShooterPower(power);
     }
-      else {
+    else if (joystick.getRightTriggerAxis() != 0)
+    { 
+      shooterSubsystem.setShooterPower(joystick.getRightTriggerAxis());
+    }
+    else {
       shooterSubsystem.setShooterPower(0);
     }
     SmartDashboard.putNumber("ShooterSpeed", power);

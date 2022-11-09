@@ -7,14 +7,17 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.LoaderSubsystem;
+import frc.robot.subsystems.ShooterSubsystem;
 
 public class RunLoaderWithJoystick extends CommandBase {
   private LoaderSubsystem loaderSubsystem;
+  private ShooterSubsystem shooterSubsystem;
   private XboxController joystick;
   /** Creates a new RunLoaderWithJoystick. */
-  public RunLoaderWithJoystick(LoaderSubsystem loaderSubsystem, XboxController joystick) {
+  public RunLoaderWithJoystick(LoaderSubsystem loaderSubsystem,ShooterSubsystem shooterSubsystem, XboxController joystick) {
     this.loaderSubsystem = loaderSubsystem;
     this.joystick = joystick;
+    this.shooterSubsystem = shooterSubsystem;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(loaderSubsystem);
   }
@@ -28,7 +31,7 @@ public class RunLoaderWithJoystick extends CommandBase {
   public void execute() {
     if (joystick.getRightTriggerAxis()!=0) {
       loaderSubsystem.setPower(-1);
-    } else if (joystick.getLeftTriggerAxis()!=0) {
+    } else if (joystick.getLeftTriggerAxis()!=0  && shooterSubsystem.getBeambreak()) {
       loaderSubsystem.setPower(1);
     }
     else {

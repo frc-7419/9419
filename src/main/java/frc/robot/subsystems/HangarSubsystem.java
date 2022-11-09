@@ -14,7 +14,7 @@ public class HangarSubsystem extends SubsystemBase {
   private TalonFX talonFX;
   /** Creates a new HangarSubsystem. */
   public HangarSubsystem() {
-    this.talonFX = new TalonFX(hangar.id);
+    this.talonFX = new TalonFX(12);
   }
 
   @Override

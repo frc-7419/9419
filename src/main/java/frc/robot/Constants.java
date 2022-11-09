@@ -22,7 +22,7 @@ public final class Constants {
         rightfollow(5),
         hangar(69), //placeholder
         loader(12),
-        beambreak(6),
+        beambreak(1),
         shoter(62);
         public final int id;
         private CanIds(int id) {

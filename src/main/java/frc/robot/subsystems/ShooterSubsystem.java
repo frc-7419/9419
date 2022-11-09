@@ -25,6 +25,9 @@ public class ShooterSubsystem extends SubsystemBase{
         shooter.setNeutralMode(NeutralMode.Coast);
     }
 
+    public boolean getBeambreak(){
+        return beamBreakSensor.get();
+    }
     @Override
     public void periodic() {
     // This method will be called once per scheduler run

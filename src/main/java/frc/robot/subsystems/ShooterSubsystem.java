@@ -10,18 +10,18 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class ShooterSubsystem extends SubsystemBase{
-    private TalonFX shooter;
+    private TalonFX shooterFX;
     private DigitalInput beambreak;
     public ShooterSubsystem(){
-        this.shooter = new TalonFX(shoter.id);
+        this.shooterFX = new TalonFX(shooter.id);
         this.beambreak = new DigitalInput(1);
     }
 
     public void setShooterPower(double power){
-        shooter.set(ControlMode.PercentOutput, power);
+        shooterFX.set(ControlMode.PercentOutput, power);
     }
     public void coast(){
-        shooter.setNeutralMode(NeutralMode.Coast);
+        shooterFX.setNeutralMode(NeutralMode.Coast);
     }
 
     public boolean getBeamBreak(){

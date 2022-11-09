@@ -18,6 +18,9 @@ public class TwoBallAuto extends SequentialCommandGroup {
   public TwoBallAuto(DriveBaseSubsystem driveBaseSubsystem, ShooterSubsystem shooterSubsystem) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
+    //Robot moves forward and shoots loaded ball
     addCommands(new StraightWithMotionMagic(driveBaseSubsystem, 10), new RunShooter(shooterSubsystem));
+    addCommands(new StraightWithMotionMagic(driveBaseSubsystem, -30));
+
   }
 }

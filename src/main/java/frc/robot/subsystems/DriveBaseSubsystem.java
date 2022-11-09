@@ -10,7 +10,6 @@ import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import static frc.robot.Constants.CanIds.*;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-// import frc.robot.Constants.CanIds;
 
 public class DriveBaseSubsystem extends SubsystemBase {
   private TalonFX left1;
@@ -23,9 +22,6 @@ public class DriveBaseSubsystem extends SubsystemBase {
     left2 = new TalonFX(leftfollow.id);
     right1 = new TalonFX(rightmast.id);
     right2 = new TalonFX(rightfollow.id);
-    factoryResetAll();
-
-    factoryResetAll();
 
     right1.setInverted(true);
     right1.setSensorPhase(false);

@@ -40,8 +40,6 @@ public class RunIntake extends CommandBase {
     else {
       intakeSubsystem.setSpeed(0);
     }
-
-
   }
 
   // Called once the command ends or is interrupted.

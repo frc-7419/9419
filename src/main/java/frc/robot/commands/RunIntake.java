@@ -32,9 +32,9 @@ public class RunIntake extends CommandBase {
     //  intakeSubsystem.setSpeed(speed);
     //}
     
-    if (joystick.getRightTriggerAxis() != 0){
+    if (joystick.getLeftTriggerAxis() != 0){
       intakeSubsystem.setSpeed(-speed);
-    } else if (joystick.getLeftTriggerAxis() != 0){
+    } else if (joystick.getRightTriggerAxis() != 0){
       intakeSubsystem.setSpeed(speed);
     }
     else {

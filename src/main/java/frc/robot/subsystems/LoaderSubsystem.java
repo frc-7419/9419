@@ -6,6 +6,7 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
 import static frc.robot.Constants.CanIds.*;
@@ -15,12 +16,12 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 public class LoaderSubsystem extends SubsystemBase {
   
   private VictorSPX victorSPX;
-  private TalonFX talonFX;
+  private TalonSRX talonSRX;
 
   /** Creates a new LoaderSubsystem. */
   public LoaderSubsystem() {
     //this.victorSPX = new VictorSPX(35);
-    this.talonFX = new TalonFX(53);
+    this.talonSRX = new TalonSRX(talon.id);
   }
 
   @Override
@@ -29,6 +30,6 @@ public class LoaderSubsystem extends SubsystemBase {
   }
   public void setPower(double power) {
     //victorSPX.set(ControlMode.PercentOutput, power);
-    talonFX.set(ControlMode.PercentOutput, power);
+    talonSRX.set(ControlMode.PercentOutput, power);
   }
 }

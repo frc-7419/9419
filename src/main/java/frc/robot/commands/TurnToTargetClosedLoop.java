@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.DriveBaseSubsystem;
 import frc.robot.subsystems.LimelightSubsystem;
 import edu.wpi.first.math.controller.PIDController;
+import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constants.LimelightConstants;
 
@@ -16,6 +17,8 @@ public class TurnToTargetClosedLoop extends CommandBase {
 
   private DriveBaseSubsystem driveBaseSubsystem;
   private LimelightSubsystem limelightSubsystem;
+  private XboxController joystick;
+
   private PIDController pidController;
   
   private double kP;
@@ -31,9 +34,12 @@ public class TurnToTargetClosedLoop extends CommandBase {
   private double velocityThreshold = 115;
   private boolean velocityBelow = false;
 
-  public TurnToTargetClosedLoop(DriveBaseSubsystem driveBaseSubsystem, LimelightSubsystem limelightSubsystem) {
+
+
+  public TurnToTargetClosedLoop(DriveBaseSubsystem driveBaseSubsystem, LimelightSubsystem limelightSubsystem, XboxController joystick) {
     this.driveBaseSubsystem = driveBaseSubsystem;
     this.limelightSubsystem = limelightSubsystem;
+    this.joystick = joystick;
     addRequirements(driveBaseSubsystem, limelightSubsystem);
   }
 
@@ -50,6 +56,8 @@ public class TurnToTargetClosedLoop extends CommandBase {
 
   @Override
   public void execute() {
+
+    if (joystick.getAButton()){
     SmartDashboard.putString("command status", "pid");
 
     tx = limelightSubsystem.getTx();
@@ -59,8 +67,8 @@ public class TurnToTargetClosedLoop extends CommandBase {
     boost = Math.abs(pidOutput) / pidOutput * .05;
     pidOutput += boost;
     SmartDashboard.putNumber("pidoutput", pidOutput);
-    driveBaseSubsystem.setLeftPower(-pidOutput);
-    driveBaseSubsystem.setRightPower(pidOutput);
+    // driveBaseSubsystem.setLeftPower(-pidOutput);
+    // driveBaseSubsystem.setRightPower(pidOutput);
 
     //distanceToTarget = (LimelightConstants.kTargetHeight - LimelightConstants.kCameraHeight) / Math.tan(Math.toRadians(ty));
     distanceToTarget = 1.426*distanceToTarget - 52.372;// linear regression needs to be updated for 9419
@@ -71,6 +79,7 @@ public class TurnToTargetClosedLoop extends CommandBase {
         velocityBelow = true;
       }
     }
+  }
 }
   @Override
   public void end(boolean interrupted) {}

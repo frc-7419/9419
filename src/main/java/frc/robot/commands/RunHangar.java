@@ -29,11 +29,11 @@ public class RunHangar extends CommandBase {
   @Override
   public void execute() {
     if (joystick.getRightBumper()){
-      hangarSubsystem.setPower(0.25);
+      hangarSubsystem.setPower(-0.75);
     }
 
     if (joystick.getLeftBumper()){
-      hangarSubsystem.setPower(0.25);
+      hangarSubsystem.setPower(0.75);
     }
 
     else{

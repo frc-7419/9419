@@ -42,7 +42,7 @@ public class RobotContainer {
   private final XboxController joystick2 = new XboxController(1);
   private final ArcadeDrive arcadeDrive = new ArcadeDrive(drivebaseSubsystem, joystick1);
   private final RunIntake runIntake = new RunIntake(intakeSubsystem, joystick1);
-  private final TurnToTargetClosedLoop turnToTargetClosedLoop = new TurnToTargetClosedLoop(drivebaseSubsystem, limelightSubsystem);
+  private final TurnToTargetClosedLoop turnToTargetClosedLoop = new TurnToTargetClosedLoop(drivebaseSubsystem, limelightSubsystem,joystick2);
   // private final RunShooter runShooter = new RunShooter(shooterSubsystem);
   private final RunShooterWithJoystick runShooterWithJoystick = new RunShooterWithJoystick(shooterSubsystem, joystick2);
   private final RunLoaderWithJoystick runLoaderWithJoystick = new RunLoaderWithJoystick(loaderSubsystem, joystick2);
@@ -64,8 +64,8 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    new JoystickButton(joystick2, XboxController.Axis.kLeftTrigger.value)
-      .whenActive(new TurnToTargetClosedLoop(drivebaseSubsystem, limelightSubsystem));
+    //new JoystickButton(joystick2, XboxController.getAButton().value)
+    //  .whenActive(new TurnToTargetClosedLoop(drivebaseSubsystem, limelightSubsystem));
     // new JoystickButton(joystick1, XboxController.Button.kA.value).whileHeld(runShooter);
   }
 
@@ -85,6 +85,6 @@ public class RobotContainer {
     shooterSubsystem.setDefaultCommand(runShooterWithJoystick);
     loaderSubsystem.setDefaultCommand(runLoaderWithJoystick);
     hangarSubsystem.setDefaultCommand(runHangar);
-    //limelightSubsystem.setDefaultCommand(turnToTargetClosedLoop);
+    // limelightSubsystem.setDefaultCommand(turnToTargetClosedLoop);
   }
 }

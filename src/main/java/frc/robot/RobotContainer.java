@@ -64,8 +64,8 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    new JoystickButton(joystick2, XboxController.Button.kLeftBumper.value)
-      .whenPressed(new TurnToTargetClosedLoop(drivebaseSubsystem, limelightSubsystem));
+    new JoystickButton(joystick2, XboxController.Axis.kLeftTrigger.value)
+      .whenActive(new TurnToTargetClosedLoop(drivebaseSubsystem, limelightSubsystem));
     // new JoystickButton(joystick1, XboxController.Button.kA.value).whileHeld(runShooter);
   }
 

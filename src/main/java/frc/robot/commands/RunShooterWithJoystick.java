@@ -44,6 +44,8 @@ public class RunShooterWithJoystick extends CommandBase {
     //}
     
     //0.55 speed, running to shoot
+
+  
     if (joystick.getYButton())
     {
       shooterSubsystem.setShooterPower(power);

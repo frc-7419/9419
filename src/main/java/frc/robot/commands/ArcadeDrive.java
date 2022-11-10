@@ -12,9 +12,9 @@ import edu.wpi.first.wpilibj.XboxController;
 /** An example command that uses an example subsystem. */
 public class ArcadeDrive extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
-  private final DriveBaseSubsystem drivebaseSubsystem;
+  private DriveBaseSubsystem drivebaseSubsystem;
   private XboxController joystick;
-  private double straightCoefficient = 0.25;//0.25;
+  private double straightCoefficient = 0.55;//0.25;
   private double turnCoefficient = 0.25;
   /**
    * Creates a new ExampleCommand.

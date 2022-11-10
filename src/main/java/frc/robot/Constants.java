@@ -22,7 +22,7 @@ public final class Constants {
         rightfollow(3),
         hangar(12),
         intake(40),
-        loader(35), // currenty grey (not motorized)
+        loader(35), 
         shooter(62),
         talon(53);
         public final int id;

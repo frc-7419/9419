@@ -19,14 +19,13 @@ import frc.robot.Constants.RobotConstants;
 
 
 public class ShooterSubsystem extends SubsystemBase{
-<<<<<<< Updated upstream
-    private TalonFX shooterFX;
+    // 
+    // public ShooterSubsystem(){
+    //     this.shooterFX = new TalonFX(shooter.id);
+    //     this.beambreak = new DigitalInput(1);
+    // }
+    
     private DigitalInput beambreak;
-    public ShooterSubsystem(){
-        this.shooterFX = new TalonFX(shooter.id);
-        this.beambreak = new DigitalInput(1);
-    }
-=======
     private TalonFX shooter;
     private DigitalInput beamBreakSensor;
     private SimpleMotorFeedforward topFeedforward;
@@ -36,7 +35,8 @@ public class ShooterSubsystem extends SubsystemBase{
     private double topTargetRawVelocity = 0;
 
     public ShooterSubsystem(){
-        shooter = new TalonFX(shoter.id);
+        beambreak = new DigitalInput(1);
+        shooter = new TalonFX(shooter.id);
         beamBreakSensor = new DigitalInput(beambreak.id);
         topFeedforward = new SimpleMotorFeedforward(RobotConstants.TopShooterKs, RobotConstants.TopShooterKv);
         
@@ -46,12 +46,11 @@ public class ShooterSubsystem extends SubsystemBase{
         
         shooter.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, 0, 0);
         shooter.setInverted(false);
->>>>>>> Stashed changes
 
     }
     
     public void setShooterPower(double power){
-        shooterFX.set(ControlMode.PercentOutput, power);
+        shooter.set(ControlMode.PercentOutput, power);
     }
 
     public void setTopClosedLoopVelocity(double velocityMetersPerSecond) {
@@ -69,28 +68,15 @@ public class ShooterSubsystem extends SubsystemBase{
     }
     
     public void coast(){
-        shooterFX.setNeutralMode(NeutralMode.Coast);
+        shooter.setNeutralMode(NeutralMode.Coast);
     }
 
-<<<<<<< Updated upstream
     public boolean getBeamBreak(){
         return beambreak.get();
-=======
-    public boolean getBeambreak(){
-        return beamBreakSensor.get();
-
-    
->>>>>>> Stashed changes
     }
 
     @Override
     public void periodic() {
-<<<<<<< Updated upstream
         SmartDashboard.putBoolean("beam break", getBeamBreak());
     }
-=======
-    // This method will be called once per scheduler run
-        SmartDashboard.putBoolean("Beam-break Detection", beamBreakSensor.get());
-                                                                                                                                                                                                                                                                                                        }
->>>>>>> Stashed changes
 }

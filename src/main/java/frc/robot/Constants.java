@@ -24,7 +24,8 @@ public final class Constants {
         intake(40),
         loader(35), 
         shooter(62),
-        talon(53);
+        talon(53),
+        beambreak(1);
         public final int id;
         private CanIds(int id) {
             this.id = id;

@@ -7,7 +7,7 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.team7419.TalonFuncs;
 
-import static frc.robot.Constants.CanIds.*;
+import frc.robot.Constants;
 
 import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 import edu.wpi.first.wpilibj.DigitalInput;
@@ -35,9 +35,8 @@ public class ShooterSubsystem extends SubsystemBase{
     private double topTargetRawVelocity = 0;
 
     public ShooterSubsystem(){
-        beambreak = new DigitalInput(1);
-        shooter = new TalonFX(shooter.id);
-        beamBreakSensor = new DigitalInput(beambreak.id);
+        shooter = new TalonFX(CanIds.shooter.id);
+        beamBreakSensor = new DigitalInput(CanIds.beambreak.id);
         topFeedforward = new SimpleMotorFeedforward(RobotConstants.TopShooterKs, RobotConstants.TopShooterKv);
         
 

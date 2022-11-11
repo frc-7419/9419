@@ -17,7 +17,6 @@ public class TurnToTargetClosedLoop extends CommandBase {
 
   private DriveBaseSubsystem driveBaseSubsystem;
   private LimelightSubsystem limelightSubsystem;
-  private XboxController joystick;
 
   private PIDController pidController;
   
@@ -36,19 +35,18 @@ public class TurnToTargetClosedLoop extends CommandBase {
 
 
 
-  public TurnToTargetClosedLoop(DriveBaseSubsystem driveBaseSubsystem, LimelightSubsystem limelightSubsystem, XboxController joystick) {
+  public TurnToTargetClosedLoop(DriveBaseSubsystem driveBaseSubsystem, LimelightSubsystem limelightSubsystem) {
     this.driveBaseSubsystem = driveBaseSubsystem;
     this.limelightSubsystem = limelightSubsystem;
-    this.joystick = joystick;
     addRequirements(driveBaseSubsystem, limelightSubsystem);
   }
 
   @Override
   public void initialize() {
 
-    kP = .016; // gets P coefficient from dashboard
+    kP = .001; // gets P coefficient from dashboard
     kI = 0;
-    kD = 1; 
+    kD = 0; 
     pidController = new PIDController(kP, kI, kD);
     pidController.setSetpoint(0);
     pidController.setTolerance(1);
@@ -57,7 +55,6 @@ public class TurnToTargetClosedLoop extends CommandBase {
   @Override
   public void execute() {
 
-    if (joystick.getAButton()){
     SmartDashboard.putString("command status", "pid");
 
     tx = limelightSubsystem.getTx();
@@ -67,8 +64,8 @@ public class TurnToTargetClosedLoop extends CommandBase {
     boost = Math.abs(pidOutput) / pidOutput * .05;
     pidOutput += boost;
     SmartDashboard.putNumber("pidoutput", pidOutput);
-    // driveBaseSubsystem.setLeftPower(-pidOutput);
-    // driveBaseSubsystem.setRightPower(pidOutput);
+    driveBaseSubsystem.setLeftPower(-pidOutput);
+    driveBaseSubsystem.setRightPower(pidOutput);
 
     //distanceToTarget = (LimelightConstants.kTargetHeight - LimelightConstants.kCameraHeight) / Math.tan(Math.toRadians(ty));
     distanceToTarget = 1.426*distanceToTarget - 52.372;// linear regression needs to be updated for 9419
@@ -79,7 +76,6 @@ public class TurnToTargetClosedLoop extends CommandBase {
         velocityBelow = true;
       }
     }
-  }
 }
   @Override
   public void end(boolean interrupted) {}

@@ -8,13 +8,13 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import static frc.robot.Constants.*;
 
 public class IntakeSubsystem extends SubsystemBase {
   /** Creates a new IntakeSubsystem. */
   private VictorSPX intake;
   public IntakeSubsystem() {
-    intake = new VictorSPX(40);
-
+    this.intake = new VictorSPX(CanIds.intake.id);
   }
 
   public void setSpeed(double speed){

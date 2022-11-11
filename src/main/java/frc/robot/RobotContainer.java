@@ -29,7 +29,7 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
-  private final DriveBaseSubsystem drivebaseSubsystem = new DriveBaseSubsystem();
+  private final DriveBaseSubsystem driveBaseSubsystem = new DriveBaseSubsystem();
   private final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
   private final ShooterSubsystem shooterSubsystem = new ShooterSubsystem();
   private final HangarSubsystem hangarSubsystem = new HangarSubsystem();
@@ -37,13 +37,13 @@ public class RobotContainer {
 
   private final XboxController joystick1 = new XboxController(0);
   private final XboxController joystick2 = new XboxController(1);
-  private final ArcadeDrive arcadeDrive = new ArcadeDrive(drivebaseSubsystem, joystick1);
+  private final ArcadeDrive arcadeDrive = new ArcadeDrive(driveBaseSubsystem, joystick1);
   private final RunIntake runIntake = new RunIntake(intakeSubsystem, joystick1);
   // private final RunShooter runShooter = new RunShooter(shooterSubsystem);
   private final RunShooterWithJoystick runShooterWithJoystick = new RunShooterWithJoystick(shooterSubsystem, joystick2);
   private final RunLoaderWithJoystick runLoaderWithJoystick = new RunLoaderWithJoystick(loaderSubsystem, joystick1);
   private final RunHangar runHangar = new RunHangar(hangarSubsystem);
-  private final TwoBallAuto twoBallAuto = new TwoBallAuto(drivebaseSubsystem, shooterSubsystem);
+  private final TwoBallAuto twoBallAuto = new TwoBallAuto(driveBaseSubsystem, shooterSubsystem);
   
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
@@ -74,7 +74,7 @@ public class RobotContainer {
   }
 
   public void setDefaultCommands() {
-    drivebaseSubsystem.setDefaultCommand(arcadeDrive);
+    driveBaseSubsystem.setDefaultCommand(arcadeDrive);
     intakeSubsystem.setDefaultCommand(runIntake);
     shooterSubsystem.setDefaultCommand(runShooterWithJoystick);
     loaderSubsystem.setDefaultCommand(runLoaderWithJoystick);

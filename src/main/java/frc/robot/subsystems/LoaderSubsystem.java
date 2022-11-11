@@ -20,7 +20,7 @@ public class LoaderSubsystem extends SubsystemBase {
   /** Creates a new LoaderSubsystem. */
   public LoaderSubsystem() {
     //this.victorSPX = new VictorSPX(35);
-    this.talonFX = new TalonFX(53);
+    this.talonFX = new TalonFX(loader.id);
   }
 
   @Override

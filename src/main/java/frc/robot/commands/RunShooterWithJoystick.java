@@ -49,6 +49,10 @@ public class RunShooterWithJoystick extends CommandBase {
     if (joystick.getYButton())
     {
       shooterSubsystem.setShooterPower(power);
+    } else if (joystick.getAButton()){
+      shooterSubsystem.setShooterPower(0.55);
+    } else if (joystick.getXButton()){
+      shooterSubsystem.setShooterPower(0.45);
     }
     else if (joystick.getRightTriggerAxis() != 0)
     { 

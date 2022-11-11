@@ -44,8 +44,10 @@ public class RunIntake extends CommandBase {
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
-  // Vince is an NFT
+  public void end(boolean interrupted) {
+    intakeSubsystem.setSpeed(0);
+  }
+
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {

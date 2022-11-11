@@ -6,6 +6,7 @@ package frc.robot.commands;
 
 import frc.robot.subsystems.DriveBaseSubsystem;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.math.filter.SlewRateLimiter;
 import edu.wpi.first.wpilibj.XboxController;
 
 
@@ -16,6 +17,8 @@ public class ArcadeDrive extends CommandBase {
   private XboxController joystick;
   private double straightCoefficient = 0.55;//0.25;
   private double turnCoefficient = 0.25;
+
+  private final SlewRateLimiter speedLimiter = new SlewRateLimiter(100);
   /**
    * Creates a new ExampleCommand.
    *
@@ -30,14 +33,12 @@ public class ArcadeDrive extends CommandBase {
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {
-
-  }
+  public void initialize() {}
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    double xSpeed = -1 * joystick.getLeftY() * straightCoefficient;
+    double xSpeed = -1 * speedLimiter.calculate(joystick.getLeftY() * straightCoefficient);
     double zRotation = joystick.getRightX() * turnCoefficient;
  
     double leftPower = xSpeed + zRotation;

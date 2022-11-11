@@ -25,19 +25,12 @@ public class RunShooter extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    
+    shooterSubsystem.setShooterPower(power);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {
-    // if(joystick.getYButton()){
-    shooterSubsystem.setShooterPower(power);
-    // }else{
-    //   shooterSubsystem.setShooterPower(0);
-    // }
-    
-  }
+  public void execute() {}
 
   // Called once the command ends or is interrupted.
   @Override

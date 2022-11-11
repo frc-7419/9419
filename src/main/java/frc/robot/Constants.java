@@ -22,9 +22,8 @@ public final class Constants {
         rightfollow(3),
         hangar(12),
         intake(40),
-        loader(35), 
+        loader(53), 
         shooter(62),
-        talon(53),
         beambreak(1);
         public final int id;
         private CanIds(int id) {

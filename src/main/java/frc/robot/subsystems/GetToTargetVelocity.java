@@ -12,7 +12,7 @@ public class GetToTargetVelocity extends CommandBase {
   private double topTargetVelocity;
   // private double bottomTargetVelocity;
 
-  public GetToTargetVelocity(ShooterSubsystem shooterSubsystem, double topTargetVelocity, double bottomTargetVelocity) {
+  public GetToTargetVelocity(ShooterSubsystem shooterSubsystem, double topTargetVelocity) {
     this.shooterSubsystem = shooterSubsystem;
     this.topTargetVelocity = topTargetVelocity;
     // this.bottomTargetVelocity = bottomTargetVelocity;

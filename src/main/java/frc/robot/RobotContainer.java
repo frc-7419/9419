@@ -47,7 +47,7 @@ public class RobotContainer {
   private final RunShooterWithJoystick runShooterWithJoystick = new RunShooterWithJoystick(shooterSubsystem, joystick2);
   private final RunLoaderWithJoystick runLoaderWithJoystick = new RunLoaderWithJoystick(loaderSubsystem, joystick2);
   private final RunHangar runHangar = new RunHangar(hangarSubsystem,joystick1);
-  private final TwoBallAuto twoBallAuto = new TwoBallAuto(drivebaseSubsystem, shooterSubsystem);
+  private final TwoBallAuto twoBallAuto = new TwoBallAuto(drivebaseSubsystem, shooterSubsystem, intakeSubsystem, loaderSubsystem);
   
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */

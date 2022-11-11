@@ -3,29 +3,25 @@
 // the WPILib BSD license file in the root directory of this project.
 
 package frc.robot.commands;
-
+import frc.robot.subsystems.IntakeSubsystem;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.ShooterSubsystem;
-import edu.wpi.first.wpilibj.XboxController;
 
+public class RunIntakeWithoutJoystick extends CommandBase {
+  /** Creates a new RunIntakeWithoutJoystick. */
+  private IntakeSubsystem intakeSubsystem;
+  private double speed;
 
-public class RunShooter extends CommandBase {
-  /** Creates a new ShooterTest. */
-  private ShooterSubsystem shooterSubsystem;
-  // private XboxController joystick;
-  private double power = 0.5;
-
-  public RunShooter(ShooterSubsystem shooterSubsystem) {
+  public RunIntakeWithoutJoystick(IntakeSubsystem intakeSubsystem, double speed) {
     // Use addRequirements() here to declare subsystem dependencies.
-    this.shooterSubsystem = shooterSubsystem;
-    // this.joystick = joystick;
-    addRequirements(shooterSubsystem);
+    this.intakeSubsystem = intakeSubsystem;
+    this.speed = speed;
+    addRequirements(intakeSubsystem);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    shooterSubsystem.setShooterPower(power);
+    intakeSubsystem.setSpeed(speed);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -35,7 +31,7 @@ public class RunShooter extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    shooterSubsystem.setShooterPower(0);
+    intakeSubsystem.setSpeed(0);
   }
 
   // Returns true when the command should end.

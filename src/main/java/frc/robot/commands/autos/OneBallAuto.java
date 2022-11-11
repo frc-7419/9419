@@ -8,31 +8,17 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.commands.RunShooter;
 import frc.robot.commands.StraightWithMotionMagic;
 import frc.robot.subsystems.DriveBaseSubsystem;
-import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
-import frc.robot.commands.RunIntakeWithoutJoystick;
-import frc.robot.commands.RunLoader;
-import frc.robot.subsystems.LoaderSubsystem;
-
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class TwoBallAuto extends SequentialCommandGroup {
-  /** Creates a new TwoBallAuto. */
-  public TwoBallAuto(DriveBaseSubsystem driveBaseSubsystem, ShooterSubsystem shooterSubsystem, IntakeSubsystem intakeSubsystem, LoaderSubsystem loaderSubsystem) {
+public class OneBallAuto extends SequentialCommandGroup {
+  /** Creates a new OneBallAuto. */
+  public OneBallAuto(DriveBaseSubsystem driveBaseSubsystem, ShooterSubsystem shooterSubsystem) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    //Robot moves forward and shoots loaded ball
     addCommands(new StraightWithMotionMagic(driveBaseSubsystem, 10), new RunShooter(shooterSubsystem));
-    //move backwards and collect second ball
-    addCommands(
-      parallel(new RunIntakeWithoutJoystick(intakeSubsystem, 1), new RunLoader(loaderSubsystem, 0.8)).deadlineWith(new StraightWithMotionMagic(driveBaseSubsystem, -70)));         
-
-    //move forward to shooting position
-    addCommands(new StraightWithMotionMagic(driveBaseSubsystem, 80));
-    //shoot
-    addCommands(new RunShooter(shooterSubsystem));
-
+    addCommands(new StraightWithMotionMagic(driveBaseSubsystem, -80));
   }
 }

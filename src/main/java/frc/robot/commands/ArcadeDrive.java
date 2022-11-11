@@ -6,16 +6,19 @@ package frc.robot.commands;
 
 import frc.robot.subsystems.DriveBaseSubsystem;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.math.filter.SlewRateLimiter;
 import edu.wpi.first.wpilibj.XboxController;
 
 
 /** An example command that uses an example subsystem. */
 public class ArcadeDrive extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
-  private final DriveBaseSubsystem drivebaseSubsystem;
+  private DriveBaseSubsystem drivebaseSubsystem;
   private XboxController joystick;
-  private double straightCoefficient = 0.25;
+  private double straightCoefficient = 0.55;//0.25;
   private double turnCoefficient = 0.25;
+
+  private final SlewRateLimiter speedLimiter = new SlewRateLimiter(100);
   /**
    * Creates a new ExampleCommand.
    *
@@ -30,17 +33,16 @@ public class ArcadeDrive extends CommandBase {
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {
-
-  }
+  public void initialize() {}
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    double straightPower = straightCoefficient * joystick.getLeftY();
-    double turnPower = turnCoefficient * joystick.getRightX(); 
-    double leftPower = turnPower + straightPower;
-    double rightPower = turnPower - straightPower;
+    double xSpeed = -1 * speedLimiter.calculate(joystick.getLeftY() * straightCoefficient);
+    double zRotation = joystick.getRightX() * turnCoefficient;
+ 
+    double leftPower = xSpeed + zRotation;
+    double rightPower = xSpeed - zRotation;
     drivebaseSubsystem.setLeftPower(leftPower);
     drivebaseSubsystem.setRightPower(rightPower);
   }

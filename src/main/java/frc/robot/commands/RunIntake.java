@@ -11,7 +11,7 @@ public class RunIntake extends CommandBase {
   /** Creates a new RunIntake. */
   private IntakeSubsystem intakeSubsystem;
   private XboxController joystick;
-  private double speed = 0.75;
+  private double speed = 1.0;
   public RunIntake(IntakeSubsystem intakeSubsystem, XboxController joystick) {
     this.intakeSubsystem = intakeSubsystem;
     this.joystick = joystick;
@@ -26,19 +26,28 @@ public class RunIntake extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if(joystick.getXButton()){
+    //if(joystick.getXButton()){
+    //  intakeSubsystem.setSpeed(-speed);
+    //} else if (joystick.getBButton()) {
+    //  intakeSubsystem.setSpeed(speed);
+    //}
+    
+    if (joystick.getLeftTriggerAxis() != 0){
       intakeSubsystem.setSpeed(-speed);
-    } else if (joystick.getBButton()) {
+    } else if (joystick.getRightTriggerAxis() != 0){
       intakeSubsystem.setSpeed(speed);
-    } else {
+    }
+    else {
       intakeSubsystem.setSpeed(0);
     }
   }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
-  // Vince is an NFT
+  public void end(boolean interrupted) {
+    intakeSubsystem.setSpeed(0);
+  }
+
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {

@@ -26,14 +26,26 @@ public class RunLoaderWithJoystick extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if (joystick.getRightTriggerAxis()!=0) {
-      loaderSubsystem.setPower(-1);
-    } else if (joystick.getLeftTriggerAxis()!=0) {
+
+    
+    //if (joystick.getRightTriggerAxis()!=0) {
+    //  loaderSubsystem.setPower(-1);
+    //} else if (joystick.getLeftTriggerAxis()!=0) {
+    //  loaderSubsystem.setPower(1);
+    //}
+    //else {
+    //  loaderSubsystem.setPower(0);
+    //}
+
+    if (joystick.getRightBumper()) {
       loaderSubsystem.setPower(1);
+    } else if (joystick.getLeftBumper()) {
+      loaderSubsystem.setPower(-1);
     }
     else {
       loaderSubsystem.setPower(0);
     }
+
   }
 
   // Called once the command ends or is interrupted.

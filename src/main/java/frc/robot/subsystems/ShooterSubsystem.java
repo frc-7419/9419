@@ -70,12 +70,12 @@ public class ShooterSubsystem extends SubsystemBase{
         shooter.setNeutralMode(NeutralMode.Coast);
     }
 
-    public boolean getBeamBreak(){
+    /*public boolean getBeamBreak(){
         return beambreak.get();
     }
 
     @Override
     public void periodic() {
         SmartDashboard.putBoolean("beam break", getBeamBreak());
-    }
+    }*/
 }

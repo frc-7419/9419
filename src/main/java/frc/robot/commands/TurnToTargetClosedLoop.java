@@ -29,7 +29,7 @@ public class TurnToTargetClosedLoop extends CommandBase {
   private double ty;
   private double distanceToTarget;
   private double boost;
-
+  private double kCameraHeight = LimelightConstants.kCameraHeight;
   private double velocityThreshold = 115;
   private boolean velocityBelow = false;
 
@@ -44,7 +44,7 @@ public class TurnToTargetClosedLoop extends CommandBase {
   @Override
   public void initialize() {
 
-    kP = .001; // gets P coefficient from dashboard
+    kP = .005; // gets P coefficient from dashboard
     kI = 0;
     kD = 0; 
     pidController = new PIDController(kP, kI, kD);
@@ -66,10 +66,10 @@ public class TurnToTargetClosedLoop extends CommandBase {
     SmartDashboard.putNumber("pidoutput", pidOutput);
     driveBaseSubsystem.setLeftPower(-pidOutput);
     driveBaseSubsystem.setRightPower(pidOutput);
-
-    //distanceToTarget = (LimelightConstants.kTargetHeight - LimelightConstants.kCameraHeight) / Math.tan(Math.toRadians(ty));
-    distanceToTarget = 1.426*distanceToTarget - 52.372;// linear regression needs to be updated for 9419
-    SmartDashboard.putNumber("distance", distanceToTarget);
+    driveBaseSubsystem.brake();
+    // distanceToTarget = (LimelightConstants.kTargetHeight - LimelightConstants.kCameraHeight) / Math.tan(Math.toRadians(ty));
+    // distanceToTarget = 1.426*distanceToTarget - 52.372;// linear regression needs to be updated for 9419
+    // SmartDashboard.putNumber("distance", distanceToTarget);
 
     if(Math.abs(driveBaseSubsystem.getLeftVelocity()) < velocityThreshold){
       if(Math.abs(driveBaseSubsystem.getRightVelocity()) < velocityThreshold){

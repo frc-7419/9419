@@ -13,7 +13,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class LimelightSubsystem extends SubsystemBase {
   // set up a new instance of NetworkTables (the api/library used to read values from limelight)
-  NetworkTable networkTable = NetworkTableInstance.getDefault().getTable("li");
+  NetworkTable networkTable = NetworkTableInstance.getDefault().getTable("limelight");
   
   // return network table values for tx and ty using getEntry()
   NetworkTableEntry tv = networkTable.getEntry("tv"); // Whether the limelight has any valid targets (0 or 1)
@@ -23,6 +23,7 @@ public class LimelightSubsystem extends SubsystemBase {
   NetworkTableEntry ts = networkTable.getEntry("ts"); // Skew or rotation (-90 degrees to 0 degrees)
 
   private double kTargetHeight = LimelightConstants.kTargetHeight;
+  private double kCameraHeight = LimelightConstants.kCameraHeight;
 
   private double theta;
   private double distance;
@@ -31,8 +32,10 @@ public class LimelightSubsystem extends SubsystemBase {
 
   @Override
   public void periodic() { // Target Area (0% of image to 100% of image)
+    distance = (kTargetHeight - kCameraHeight)/(Math.tan(Math.toRadians(getTy() + LimelightConstants.mountingAngle))*(Math.cos(Math.toRadians(getTx()))));
     SmartDashboard.putNumber("tx", getTx());
     SmartDashboard.putNumber("ty", getTy());
+    SmartDashboard.putNumber("distance", distance);
     // SmartDashboard.putNumber("ta", ta.getDouble(0));
     // SmartDashboard.putNumber("theta", getTheta());
     // SmartDashboard.putNumber("distance", getDistance());

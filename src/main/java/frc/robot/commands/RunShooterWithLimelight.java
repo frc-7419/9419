@@ -5,21 +5,24 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.subsystems.LimelightSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-public class RunShooterWithJoystick extends CommandBase {
+public class RunShooterWithLimelight extends CommandBase {
 
   private ShooterSubsystem shooterSubsystem;
   private XboxController joystick;
+  private LimelightSubsystem limelightSubsystem;
   
 
   /** Creates a new RunShooterWithJoystick. */
-  public RunShooterWithJoystick(ShooterSubsystem shooterSubsystem, XboxController joystick) {
+  public RunShooterWithLimelight(ShooterSubsystem shooterSubsystem, LimelightSubsystem limelightSubsystem, XboxController joystick) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.shooterSubsystem = shooterSubsystem;
     this.joystick = joystick;
+    this.limelightSubsystem = limelightSubsystem;
     addRequirements(shooterSubsystem);
   }
 
@@ -32,8 +35,8 @@ public class RunShooterWithJoystick extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-   
-    double power = 0.55;
+    double distance = limelightSubsystem.getDistance();
+    double power = 1 * distance;
     //Shooting with bumper
     
     //if (joystick.getRightTriggerAxis()!=0)
@@ -46,22 +49,9 @@ public class RunShooterWithJoystick extends CommandBase {
     //0.55 speed, running to shoot
 
   
-    if (joystick.getYButton())
-    {
-      shooterSubsystem.setShooterPower(power);
-    } else if (joystick.getAButton()){
-      shooterSubsystem.setShooterPower(0.75);
-    } else if (joystick.getXButton()){
-      shooterSubsystem.setShooterPower(0.65);
+    if (joystick.getYButton()) {
+        shooterSubsystem.setShooterPower(power);
     }
-    else if (joystick.getRightTriggerAxis() != 0)
-    { 
-      shooterSubsystem.setShooterPower(joystick.getRightTriggerAxis());
-    }
-    else {
-      shooterSubsystem.setShooterPower(0);
-    }
-    SmartDashboard.putNumber("ShooterSpeed", power);
   }
 
   // Called once the command ends or is interrupted.

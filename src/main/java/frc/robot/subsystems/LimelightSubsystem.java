@@ -56,14 +56,13 @@ public class LimelightSubsystem extends SubsystemBase {
   public double getTy() {
     return ty.getDouble(0);
   }
+  public double getDistance() {return distance;}
   
   public void setLED(int state) {
     networkTable.getEntry("ledMode").setNumber(state);
   }
   
-  public double getDistance () {
-    return distance;
-  }
+  
   public double getTheta() {return theta;}
-  // public double getDistance() {return distance;}
+  
 }

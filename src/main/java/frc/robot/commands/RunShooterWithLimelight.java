@@ -36,7 +36,7 @@ public class RunShooterWithLimelight extends CommandBase {
   @Override
   public void execute() {
     double distance = limelightSubsystem.getDistance();
-    double power = 1 * distance;
+    
     //Shooting with bumper
     
     //if (joystick.getRightTriggerAxis()!=0)
@@ -49,9 +49,9 @@ public class RunShooterWithLimelight extends CommandBase {
     //0.55 speed, running to shoot
 
   
-    if (joystick.getYButton()) {
+    /*if (joystick.getYButton()) {
         shooterSubsystem.setShooterPower(power);
-    }
+    }*/
   }
 
   // Called once the command ends or is interrupted.

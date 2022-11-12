@@ -1,66 +1,61 @@
-// Copyright (c) FIRST and other WPILib contributors.
-// Open Source Software; you can modify and/or share it under the terms of
-// the WPILib BSD license file in the root directory of this project.
-
 package frc.robot.commands;
 
+import com.team7419.InterpolatedTreeMap;
+
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants;
 import frc.robot.subsystems.LimelightSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
-import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class RunShooterWithLimelight extends CommandBase {
 
   private ShooterSubsystem shooterSubsystem;
-  private XboxController joystick;
   private LimelightSubsystem limelightSubsystem;
-  
 
-  /** Creates a new RunShooterWithJoystick. */
-  public RunShooterWithLimelight(ShooterSubsystem shooterSubsystem, LimelightSubsystem limelightSubsystem, XboxController joystick) {
-    // Use addRequirements() here to declare subsystem dependencies.
+  private InterpolatedTreeMap shooterReferencePoints;
+
+  private double kp = 0;
+
+  private double targetVelocity;
+
+  public RunShooterWithLimelight(ShooterSubsystem shooterSubsystem, LimelightSubsystem limelightSubsystem) {
     this.shooterSubsystem = shooterSubsystem;
-    this.joystick = joystick;
     this.limelightSubsystem = limelightSubsystem;
     addRequirements(shooterSubsystem);
+
+    shooterReferencePoints = new InterpolatedTreeMap();
+
+    // config reference points from constants file
+    shooterSubsystem.configInterpolatedTreeMapReferencePoints(Constants.kDistanceToShooterVelocity, shooterReferencePoints);
   }
 
-  // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    shooterSubsystem.coast();
+    targetVelocity = shooterReferencePoints.get(limelightSubsystem.getDistance()).doubleValue();
+
+    shooterSubsystem.setPIDF(kp, 0, 0, 0);
+
+    shooterSubsystem.setClosedLoopVelocity(targetVelocity);
   }
 
-  // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    double distance = limelightSubsystem.getDistance();
-    double power = 1 * distance;
-    //Shooting with bumper
-    
-    //if (joystick.getRightTriggerAxis()!=0)
-    //{
-    //  shooterSubsystem.setShooterPower(joystick.getRightTriggerAxis());
-    //} else if (joystick.getLeftTriggerAxis()!=0){
-    //  shooterSubsystem.setShooterPower(-joystick.getLeftTriggerAxis());
-    //}
-    
-    //0.55 speed, running to shoot
+    targetVelocity = shooterReferencePoints.get(limelightSubsystem.getDistance()).doubleValue();
 
+    shooterSubsystem.setPIDF(kp, 0, 0 , 0);
+    shooterSubsystem.setClosedLoopVelocity(targetVelocity);
   
-    if (joystick.getYButton()) {
-        shooterSubsystem.setShooterPower(power);
-    }
+    // SmartDashboard.putBoolean("Top On Target", shooterSubsystem.topOnTarget());
+    // SmartDashboard.putBoolean("Bottom on Target", shooterSubsystem.bottomOnTarget());
+    // SmartDashboard.putBoolean("Both on Target", shooterSubsystem.bothOnTarget());
   }
 
-  // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    shooterSubsystem.setShooterPower(0);
+    // SmartDashboard.putBoolean("Shooter Running", false);
+    shooterSubsystem.off();
   }
 
-  // Returns true when the command should end.
   @Override
   public boolean isFinished() {
     return false;

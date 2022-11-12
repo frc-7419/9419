@@ -5,6 +5,7 @@ import com.ctre.phoenix.motorcontrol.DemandType;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
+import com.team7419.InterpolatedTreeMap;
 import com.team7419.TalonFuncs;
 
 import frc.robot.Constants;
@@ -52,7 +53,7 @@ public class ShooterSubsystem extends SubsystemBase{
         shooter.set(ControlMode.PercentOutput, power);
     }
 
-    public void setTopClosedLoopVelocity(double velocityMetersPerSecond) {
+    public void setClosedLoopVelocity(double velocityMetersPerSecond) {
         this.topTargetVelocity = velocityMetersPerSecond;
         this.topTargetRawVelocity = velocityMetersPerSecond * RobotConstants.RotationsPerMeter * 2048 * 0.1;
         shooter.set(ControlMode.Velocity, velocityMetersPerSecond * RobotConstants.RotationsPerMeter * 2048 * 0.1, DemandType.ArbitraryFeedForward, topFeedforward.calculate(velocityMetersPerSecond) / maxVoltage);
@@ -62,7 +63,7 @@ public class ShooterSubsystem extends SubsystemBase{
         setShooterPower(0);
     }
     
-    public void setTopPIDF(double kP, double kI, double kD, double kF){
+    public void setPIDF(double kP, double kI, double kD, double kF){
         TalonFuncs.setPIDFConstants(0, shooter, kP, kI, kD, kF);
     }
     
@@ -78,4 +79,9 @@ public class ShooterSubsystem extends SubsystemBase{
     public void periodic() {
         SmartDashboard.putBoolean("beam break", getBeamBreak());
     }*/
+    public void configInterpolatedTreeMapReferencePoints(Double[][] referencePoints, InterpolatedTreeMap interpolatedTreeMap) {
+        for (Double[] i : referencePoints) {
+            interpolatedTreeMap.put(i[0], i[1]);
+        }
+    }
 }

@@ -21,7 +21,7 @@ public class GetToTargetVelocity extends CommandBase {
 
   @Override
   public void initialize() {
-    shooterSubsystem.setTopPIDF(0, 0, 0, 0);
+    shooterSubsystem.setPIDF(0, 0, 0, 0);
     // shooterSubsystem.setBottomPIDF(0, 0, 0, 0);
   }
 
@@ -30,9 +30,9 @@ public class GetToTargetVelocity extends CommandBase {
     // bKp = PIDConstants.BottomShooterkP;
     tKp = PIDConstants.TopShooterkP;
 
-    shooterSubsystem.setTopPIDF(0, 0, 0, 0);
+    shooterSubsystem.setPIDF(0, 0, 0, 0);
     // shooterSubsystem.setBottomPIDF(0, 0, 0, 0);
-    shooterSubsystem.setTopClosedLoopVelocity(topTargetVelocity);
+    shooterSubsystem.setClosedLoopVelocity(topTargetVelocity);
     // shooterSubsystem.setBottomClosedLoopVelocity(bottomTargetVelocity);
   }
 

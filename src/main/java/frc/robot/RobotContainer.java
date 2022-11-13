@@ -21,12 +21,16 @@ import frc.robot.subsystems.LimelightSubsystem;
 import frc.robot.subsystems.LoaderSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 /**
- * This class is where the bulk of the robot should be declared. Since Command-based is a
- * "declarative" paradigm, very little robot logic should actually be handled in the {@link Robot}
- * periodic methods (other than the scheduler calls). Instead, the structure of the robot (including
+ * This class is where the bulk of the robot should be declared. Since
+ * Command-based is a
+ * "declarative" paradigm, very little robot logic should actually be handled in
+ * the {@link Robot}
+ * periodic methods (other than the scheduler calls). Instead, the structure of
+ * the robot (including
  * subsystems, commands, and button mappings) should be declared here.
  */
 public class RobotContainer {
@@ -41,16 +45,19 @@ public class RobotContainer {
   private final XboxController joystick1 = new XboxController(0);
   private final XboxController joystick2 = new XboxController(1);
   private final ArcadeDrive arcadeDrive = new ArcadeDrive(driveBaseSubsystem, joystick1);
-  private final TurnToTargetClosedLoop turnToTargetClosedLoop = new TurnToTargetClosedLoop(driveBaseSubsystem, limelightSubsystem);
+  private final TurnToTargetClosedLoop turnToTargetClosedLoop = new TurnToTargetClosedLoop(driveBaseSubsystem,
+      limelightSubsystem);
   private final RunIntake runIntake = new RunIntake(intakeSubsystem, joystick1);
-  // private final RunShooter runShooter = new RunShooter(shooterSubsystem);
-  // private final RunShooterWithLimelight runshooterwithlimelight = new RunShooterWith
+
   private final RunShooterWithJoystick runShooterWithJoystick = new RunShooterWithJoystick(shooterSubsystem, joystick2);
   private final RunLoaderWithJoystick runLoaderWithJoystick = new RunLoaderWithJoystick(loaderSubsystem, joystick2);
   private final RunHangar runHangar = new RunHangar(hangarSubsystem, joystick1);
-  private final TwoBallAuto twoBallAuto = new TwoBallAuto(driveBaseSubsystem, shooterSubsystem, intakeSubsystem, loaderSubsystem);
- 
-  /** The container for the robot. Contains subsystems, OI devices, and commands. */
+  private final TwoBallAuto twoBallAuto = new TwoBallAuto(driveBaseSubsystem, shooterSubsystem, intakeSubsystem,
+      loaderSubsystem);
+
+  /**
+   * The container for the robot. Contains subsystems, OI devices, and commands.
+   */
   public RobotContainer() {
     // Configure the button bindings
     configureButtonBindings();
@@ -58,15 +65,18 @@ public class RobotContainer {
   }
 
   /**
-   * Use this method to define your button->command mappings. Buttons can be created by
+   * Use this method to define your button->command mappings. Buttons can be
+   * created by
    * instantiating a {@link GenericHID} or one of its subclasses ({@link
-   * edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then passing it to a {@link
+   * edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then passing
+   * it to a {@link
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    // new JoystickButton(joystick1, XboxController.Button.kA.value).whileHeld(runShooter);
+    // new JoystickButton(joystick1,
+    // XboxController.Button.kA.value).whileHeld(runShooter);
     new JoystickButton(joystick2, XboxController.Button.kB.value)
-      .whileHeld(turnToTargetClosedLoop);
+        .whileHeld(turnToTargetClosedLoop);
   }
 
   /**
@@ -77,7 +87,7 @@ public class RobotContainer {
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
     // return twoBallAuto;
-    return twoBallAuto;
+    return new WaitCommand(1);
   }
 
   public void setDefaultCommands() {

@@ -13,6 +13,7 @@ import frc.robot.commands.RunLoaderWithJoystick;
 import frc.robot.commands.RunShooter;
 import frc.robot.commands.RunShooterWithJoystick;
 import frc.robot.commands.TurnToTargetClosedLoop;
+import frc.robot.commands.autos.TaxiAuto;
 import frc.robot.commands.autos.TwoBallAuto;
 import frc.robot.subsystems.DriveBaseSubsystem;
 import frc.robot.subsystems.HangarSubsystem;
@@ -49,7 +50,7 @@ public class RobotContainer {
   private final RunLoaderWithJoystick runLoaderWithJoystick = new RunLoaderWithJoystick(loaderSubsystem, joystick2);
   private final RunHangar runHangar = new RunHangar(hangarSubsystem, joystick1);
   private final TwoBallAuto twoBallAuto = new TwoBallAuto(driveBaseSubsystem, shooterSubsystem, intakeSubsystem, loaderSubsystem);
-  
+  private final TaxiAuto taxiAuto = new TaxiAuto(driveBaseSubsystem);
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -77,6 +78,7 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
+    // return twoBallAuto;
     return twoBallAuto;
   }
 

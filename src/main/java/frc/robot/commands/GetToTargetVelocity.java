@@ -1,34 +1,47 @@
-// Copyright (c) FIRST and other WPILib contributors.
-// Open Source Software; you can modify and/or share it under the terms of
-// the WPILib BSD license file in the root directory of this project.
-
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants.PIDConstants;
 import frc.robot.subsystems.ShooterSubsystem;
 
 public class GetToTargetVelocity extends CommandBase {
-  private ShooterSubsystem shooterSubsystem;
-  /** Creates a new GetToTargetVelocity. */
-  public GetToTargetVelocity(ShooterSubsystem shooterSubsystem) {
+
+  private ShooterSubsystem shooterSubsystem; 
+
+  private double bKp, tKp;
+
+  private double topTargetVelocity;
+  // private double bottomTargetVelocity;
+
+  public GetToTargetVelocity(ShooterSubsystem shooterSubsystem, double topTargetVelocity) {
     this.shooterSubsystem = shooterSubsystem;
+    this.topTargetVelocity = topTargetVelocity;
+    // this.bottomTargetVelocity = bottomTargetVelocity;
     addRequirements(shooterSubsystem);
-    // Use addRequirements() here to declare subsystem dependencies.
   }
 
-  // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+    shooterSubsystem.setPIDF(0, 0, 0, 0);
+    // shooterSubsystem.setBottomPIDF(0, 0, 0, 0);
+  }
 
-  // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {}
+  public void execute() {
+    // bKp = PIDConstants.BottomShooterkP;
+    tKp = PIDConstants.TopShooterkP;
 
-  // Called once the command ends or is interrupted.
+    shooterSubsystem.setPIDF(0, 0, 0, 0);
+    // shooterSubsystem.setBottomPIDF(0, 0, 0, 0);
+    shooterSubsystem.setClosedLoopVelocity(topTargetVelocity);
+    // shooterSubsystem.setBottomClosedLoopVelocity(bottomTargetVelocity);
+  }
+
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+    shooterSubsystem.off();
+  }
 
-  // Returns true when the command should end.
   @Override
   public boolean isFinished() {
     return false;

@@ -52,7 +52,7 @@ public class ShooterSubsystem extends SubsystemBase{
         shooter.set(ControlMode.PercentOutput, power);
     }
 
-    public void setTopClosedLoopVelocity(double velocityMetersPerSecond) {
+    public void setClosedLoopVelocity(double velocityMetersPerSecond) {
         this.topTargetVelocity = velocityMetersPerSecond;
         this.topTargetRawVelocity = velocityMetersPerSecond * RobotConstants.RotationsPerMeter * 2048 * 0.1;
         shooter.set(ControlMode.Velocity, velocityMetersPerSecond * RobotConstants.RotationsPerMeter * 2048 * 0.1, DemandType.ArbitraryFeedForward, topFeedforward.calculate(velocityMetersPerSecond) / maxVoltage);
@@ -62,7 +62,7 @@ public class ShooterSubsystem extends SubsystemBase{
         setShooterPower(0);
     }
     
-    public void setTopPIDF(double kP, double kI, double kD, double kF){
+    public void setPIDF(double kP, double kI, double kD, double kF){
         TalonFuncs.setPIDFConstants(0, shooter, kP, kI, kD, kF);
     }
     

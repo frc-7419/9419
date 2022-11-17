@@ -7,6 +7,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.commands.ArcadeDrive;
+import frc.robot.commands.ArcadeDriveWithLimelight;
 import frc.robot.commands.RunHangar;
 import frc.robot.commands.RunIntake;
 import frc.robot.commands.RunLoaderWithJoystick;
@@ -48,7 +49,7 @@ public class RobotContainer {
   private final TurnToTargetClosedLoop turnToTargetClosedLoop = new TurnToTargetClosedLoop(driveBaseSubsystem,
       limelightSubsystem);
   private final RunIntake runIntake = new RunIntake(intakeSubsystem, joystick1);
-
+  private final ArcadeDriveWithLimelight arcadeDriveWithLimelight = new ArcadeDriveWithLimelight(driveBaseSubsystem, joystick1, limelightSubsystem);
   private final RunShooterWithJoystick runShooterWithJoystick = new RunShooterWithJoystick(shooterSubsystem, joystick2);
   private final RunLoaderWithJoystick runLoaderWithJoystick = new RunLoaderWithJoystick(loaderSubsystem, joystick2);
   private final RunHangar runHangar = new RunHangar(hangarSubsystem, joystick1);

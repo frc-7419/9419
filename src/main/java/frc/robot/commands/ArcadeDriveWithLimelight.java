@@ -4,12 +4,16 @@
 
 package frc.robot.commands;
 
+import frc.robot.Constants;
 import frc.robot.subsystems.DriveBaseSubsystem;
 import frc.robot.subsystems.LimelightSubsystem;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.math.filter.SlewRateLimiter;
+import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.wpilibj.XboxController;
-
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 
 /** An example command that uses an example subsystem. */
 public class ArcadeDriveWithLimelight extends CommandBase {
@@ -19,7 +23,11 @@ public class ArcadeDriveWithLimelight extends CommandBase {
   private LimelightSubsystem limelightSubsystem;
   private double straightCoefficient = 0.55;//0.25;
   private double turnCoefficient = 0.25;
-
+  private ShuffleboardTab distanceTab = Shuffleboard.getTab("Robot Distance");
+  private NetworkTableEntry distanceEntry = distanceTab.add("Distance (Meters) ",0).getEntry();
+  private double kPdistance = Constants.PIDConstants.DriveBaseMotionMagickP; //PID control... use this value for now
+  private double threshold = 0.8;
+  private double wantDistance = 5.0;
   private final SlewRateLimiter speedLimiter = new SlewRateLimiter(100);
   /**
    * Creates a new ExampleCommand.
@@ -46,15 +54,17 @@ public class ArcadeDriveWithLimelight extends CommandBase {
  
     double leftPower = xSpeed + zRotation;
     double rightPower = xSpeed - zRotation;
-    if ((joystick.getRightBumperPressed() || joystick.getLeftBumperPressed()) && limelightSubsystem.getTv()==1) {
+    distanceEntry.setDouble(limelightSubsystem.getDistance());
+
+    if ((joystick.getRightBumperPressed() || joystick.getLeftBumperPressed()) && limelightSubsystem.getTv()==1) { //buttons will be decided later
       // threshold = 0.5 + 0.5 = 1
-      if (limelightSubsystem.getDistance() < 4.5) {
+      if (limelightSubsystem.getDistance() < wantDistance-threshold) {
         drivebaseSubsystem.setLeftPower(0.3);
-        drivebaseSubsystem.setRightPower(rightPower);
-      }
-      else if (limelightSubsystem.getDistance() > 5.3) {
         drivebaseSubsystem.setRightPower(0.3);
-        drivebaseSubsystem.setLeftPower(0.3);
+      }
+      else if (limelightSubsystem.getDistance() > wantDistance+threshold) {
+        drivebaseSubsystem.setRightPower(-0.3);
+        drivebaseSubsystem.setLeftPower(-0.3);
       }
     }
     else {

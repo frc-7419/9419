@@ -5,38 +5,32 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.ShooterSubsystem;
-import edu.wpi.first.wpilibj.XboxController;
+import frc.robot.subsystems.DriveBaseSubsystem;
 
-
-public class RunShooter extends CommandBase {
-  /** Creates a new ShooterTest. */
-  private ShooterSubsystem shooterSubsystem;
-  // private XboxController joystick;
-  private double power = 0.55;
-
-  public RunShooter(ShooterSubsystem shooterSubsystem) {
+public class StraightMove extends CommandBase {
+  /** Creates a new straightMove. */
+  private DriveBaseSubsystem driveBaseSubsystem;
+  private double power;
+  public StraightMove(DriveBaseSubsystem driveBaseSubsystem, double power) {
+    this.driveBaseSubsystem = driveBaseSubsystem;
+    this.power = power;
+    addRequirements(driveBaseSubsystem);
     // Use addRequirements() here to declare subsystem dependencies.
-    this.shooterSubsystem = shooterSubsystem;
-    // this.joystick = joystick;
-    addRequirements(shooterSubsystem);
   }
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {
-    shooterSubsystem.setShooterPower(power);
-  }
+  public void initialize() {}
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {}
+  public void execute() {
+    driveBaseSubsystem.allPower(power);
+  }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {
-    shooterSubsystem.setShooterPower(0);
-  }
+  public void end(boolean interrupted) {}
 
   // Returns true when the command should end.
   @Override

@@ -4,43 +4,29 @@
 
 package frc.robot.commands;
 import frc.robot.subsystems.IntakeSubsystem;
-import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
-public class RunIntake extends CommandBase {
-  /** Creates a new RunIntake. */
+public class RunIntakeWithoutJoystick extends CommandBase {
+  /** Creates a new RunIntakeWithoutJoystick. */
   private IntakeSubsystem intakeSubsystem;
-  private XboxController joystick;
-  private double speed = 1.0;
-  public RunIntake(IntakeSubsystem intakeSubsystem, XboxController joystick) {
-    this.intakeSubsystem = intakeSubsystem;
-    this.joystick = joystick;
-    addRequirements(intakeSubsystem);
+  private double speed;
+
+  public RunIntakeWithoutJoystick(IntakeSubsystem intakeSubsystem, double speed) {
     // Use addRequirements() here to declare subsystem dependencies.
+    this.intakeSubsystem = intakeSubsystem;
+    this.speed = speed;
+    addRequirements(intakeSubsystem);
   }
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+    intakeSubsystem.setSpeed(speed);
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {
-    //if(joystick.getXButton()){
-    //  intakeSubsystem.setSpeed(-speed);
-    //} else if (joystick.getBButton()) {
-    //  intakeSubsystem.setSpeed(speed);
-    //}
-    
-    if (joystick.getLeftTriggerAxis() != 0){
-      intakeSubsystem.setSpeed(-speed);
-    } else if (joystick.getRightTriggerAxis() != 0){
-      intakeSubsystem.setSpeed(speed);
-    }
-    else {
-      intakeSubsystem.setSpeed(0);
-    }
-  }
+  public void execute() {}
 
   // Called once the command ends or is interrupted.
   @Override

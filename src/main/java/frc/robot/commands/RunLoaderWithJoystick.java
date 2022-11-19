@@ -3,20 +3,20 @@
 // the WPILib BSD license file in the root directory of this project.
 
 package frc.robot.commands;
-import frc.robot.subsystems.IntakeSubsystem;
+
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.subsystems.LoaderSubsystem;
 
-public class RunIntake extends CommandBase {
-  /** Creates a new RunIntake. */
-  private IntakeSubsystem intakeSubsystem;
+public class RunLoaderWithJoystick extends CommandBase {
+  private LoaderSubsystem loaderSubsystem;
   private XboxController joystick;
-  private double speed = 1.0;
-  public RunIntake(IntakeSubsystem intakeSubsystem, XboxController joystick) {
-    this.intakeSubsystem = intakeSubsystem;
+  /** Creates a new RunLoaderWithJoystick. */
+  public RunLoaderWithJoystick(LoaderSubsystem loaderSubsystem, XboxController joystick) {
+    this.loaderSubsystem = loaderSubsystem;
     this.joystick = joystick;
-    addRequirements(intakeSubsystem);
     // Use addRequirements() here to declare subsystem dependencies.
+    addRequirements(loaderSubsystem);
   }
 
   // Called when the command is initially scheduled.
@@ -26,26 +26,32 @@ public class RunIntake extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    //if(joystick.getXButton()){
-    //  intakeSubsystem.setSpeed(-speed);
-    //} else if (joystick.getBButton()) {
-    //  intakeSubsystem.setSpeed(speed);
-    //}
+
     
-    if (joystick.getLeftTriggerAxis() != 0){
-      intakeSubsystem.setSpeed(-speed);
-    } else if (joystick.getRightTriggerAxis() != 0){
-      intakeSubsystem.setSpeed(speed);
+    //if (joystick.getRightTriggerAxis()!=0) {
+    //  loaderSubsystem.setPower(-1);
+    //} else if (joystick.getLeftTriggerAxis()!=0) {
+    //  loaderSubsystem.setPower(1);
+    //}
+    //else {
+    //  loaderSubsystem.setPower(0);
+    //}
+
+    if (joystick.getRightBumper()) {
+      loaderSubsystem.setPower(1);
+    } else if (joystick.getLeftBumper()) {
+      loaderSubsystem.setPower(-1);
     }
     else {
-      intakeSubsystem.setSpeed(0);
+      loaderSubsystem.setPower(0);
     }
+
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    intakeSubsystem.setSpeed(0);
+    loaderSubsystem.setPower(0);
   }
 
   // Returns true when the command should end.

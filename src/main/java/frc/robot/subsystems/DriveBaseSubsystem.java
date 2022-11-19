@@ -7,22 +7,32 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
+import static frc.robot.Constants.CanIds.*;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-// import frc.robot.Constants.CanIds;
 
-public class DrivebaseSubsystem extends SubsystemBase {
-  /** Creates a new ExampleSubsystem. */
+public class DriveBaseSubsystem extends SubsystemBase {
   private TalonFX left1;
   private TalonFX left2;
   private TalonFX right1;
   private TalonFX right2;
 
-  public DrivebaseSubsystem() {
-    left1 = new TalonFX(2);
-    left2 = new TalonFX(3);
-    right1 = new TalonFX(4);
-    right2 = new TalonFX(5);
+  public DriveBaseSubsystem() {
+    left1 = new TalonFX(leftmast.id);
+    left2 = new TalonFX(leftfollow.id);
+    right1 = new TalonFX(rightmast.id);
+    right2 = new TalonFX(rightfollow.id);
+
+    right1.setInverted(true);
+    right1.setSensorPhase(false);
+    right2.setInverted(true);
+    right2.setSensorPhase(false);
+
+    left1.setInverted(false);
+    left2.setInverted(false);
+
+    left2.follow(left1);
+    right2.follow(right1);
   }
 
   public void setLeftPower(double power) {
@@ -53,19 +63,24 @@ public class DrivebaseSubsystem extends SubsystemBase {
     setLeftPower(power);
     setRightPower(power);
   }
-  
-  public void coast() {
-    right1.setNeutralMode(NeutralMode.Coast);
-    right2.setNeutralMode(NeutralMode.Coast);
-    left1.setNeutralMode(NeutralMode.Coast);
-    left2.setNeutralMode(NeutralMode.Coast);
+  public void stop(){allPower(0);}
+  public void setAllMode(NeutralMode mode){
+    right1.setNeutralMode(mode);
+    right2.setNeutralMode(mode);
+    left1.setNeutralMode(mode);
+    left2.setNeutralMode(mode);
   }
+  public void brake(){setAllMode(NeutralMode.Brake);}
+  public void coast(){setAllMode(NeutralMode.Coast);}
 
-  public void brake() {
-    right1.setNeutralMode(NeutralMode.Brake);
-    right2.setNeutralMode(NeutralMode.Brake);
-    left1.setNeutralMode(NeutralMode.Brake);
-    left2.setNeutralMode(NeutralMode.Brake);
+  public double getLeftVelocity(){return left1.getSelectedSensorVelocity();}
+  public double getRightVelocity(){return right1.getSelectedSensorVelocity();}
+  
+  public void factoryResetAll() {
+    right1.configFactoryDefault();
+    right2.configFactoryDefault();
+    left1.configFactoryDefault();
+    left2.configFactoryDefault();
   }
 
   @Override

@@ -4,31 +4,42 @@
 
 package frc.robot.commands;
 
+import frc.robot.Constants;
 import frc.robot.subsystems.DriveBaseSubsystem;
+import frc.robot.subsystems.LimelightSubsystem;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.math.filter.SlewRateLimiter;
+import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.wpilibj.XboxController;
-
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 
 /** An example command that uses an example subsystem. */
-public class ArcadeDrive extends CommandBase {
+public class ArcadeDriveWithLimelight extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
   private DriveBaseSubsystem drivebaseSubsystem;
   private XboxController joystick;
+  private LimelightSubsystem limelightSubsystem;
   private double straightCoefficient = 0.55;//0.25;
   private double turnCoefficient = 0.25;
-
+  private ShuffleboardTab distanceTab = Shuffleboard.getTab("Robot Distance");
+  private NetworkTableEntry distanceEntry = distanceTab.add("Distance (Meters) ",0).getEntry();
+  private double kPdistance = Constants.PIDConstants.DriveBaseMotionMagickP; //PID control... use this value for now
+  private double threshold = 0.8;
+  private double wantDistance = 5.0;
   private final SlewRateLimiter speedLimiter = new SlewRateLimiter(100);
   /**
    * Creates a new ExampleCommand.
    *
    * @param subsystem The subsystem used by this command.
    */
-  public ArcadeDrive(DriveBaseSubsystem drivebaseSubsystem, XboxController joystick) {
+  public ArcadeDriveWithLimelight(DriveBaseSubsystem drivebaseSubsystem, XboxController joystick, LimelightSubsystem limelightSubsystem) {
     this.drivebaseSubsystem = drivebaseSubsystem;
     this.joystick = joystick;
+    this.limelightSubsystem = limelightSubsystem;
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(drivebaseSubsystem);
+    addRequirements(drivebaseSubsystem, limelightSubsystem);
   }
 
   // Called when the command is initially scheduled.
@@ -43,8 +54,23 @@ public class ArcadeDrive extends CommandBase {
  
     double leftPower = xSpeed + zRotation;
     double rightPower = xSpeed - zRotation;
-    drivebaseSubsystem.setLeftPower(leftPower);
-    drivebaseSubsystem.setRightPower(rightPower);
+    distanceEntry.setDouble(limelightSubsystem.getDistance());
+
+    if ((joystick.getRightBumperPressed() || joystick.getLeftBumperPressed()) && limelightSubsystem.getTv()==1) { //buttons will be decided later
+      // threshold = 0.5 + 0.5 = 1
+      if (limelightSubsystem.getDistance() < wantDistance-threshold) {
+        drivebaseSubsystem.setLeftPower(0.3);
+        drivebaseSubsystem.setRightPower(0.3);
+      }
+      else if (limelightSubsystem.getDistance() > wantDistance+threshold) {
+        drivebaseSubsystem.setRightPower(-0.3);
+        drivebaseSubsystem.setLeftPower(-0.3);
+      }
+    }
+    else {
+      drivebaseSubsystem.setLeftPower(leftPower);
+      drivebaseSubsystem.setRightPower(rightPower);
+    }
   }
 
   // Called once the command ends or is interrupted.

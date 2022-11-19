@@ -40,7 +40,7 @@ public class TwoBallAuto extends ParallelCommandGroup {
           // new RunLoader(loaderSubsystem, 0.5)
         ).withTimeout(2),
         // new RunLoader(loaderSubsystem, 0.5),
-        new StraightMove(driveBaseSubsystem, 0.3).withTimeout(1)
+        new StraightMove(driveBaseSubsystem, 0).withTimeout(1)
       )
     );
     /*addCommands(parallel().withTimeout(4));
